@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 08:40:41 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:03:18 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:20:28 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:32 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ bool	builtins(t_shell *shell, char *cmd, char **args)
 		return (cd(shell, cmd, args), TRUE);
 	else if (ft_strcmp(cmd, "export") == TRUE && shell->should_execute == TRUE)
 		return (export(shell, cmd, args), TRUE);
-	else if (ft_strcmp(cmd, "cd") == TRUE
-		&& shell->exec_on_pipe == FALSE)
+	else if (ft_strcmp(cmd, "cd") == TRUE && shell->exec_on_pipe == FALSE)
 		return (cd(shell, cmd, args), TRUE);
 	else if (ft_strcmp(cmd, "pwd") == TRUE && shell->should_execute == TRUE)
 		return (pwd(shell, args), TRUE);

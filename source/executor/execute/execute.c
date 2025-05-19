@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:22:11 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:04:02 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:07 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	execute(t_shell *shell, t_cmd_tbl *table)
 		return ;
 	}
 	handle_heredocs(table, shell);
-	if (g_ctrl_c == FALSE && table != NULL
-		&& table->next == NULL && table_size(table) == 1)
+	if (g_ctrl_c == FALSE && table != NULL && table->next == NULL
+		&& table_size(table) == 1)
 		exec_without_pipes(table, shell);
-	else if (g_ctrl_c == FALSE
-		&& table != NULL && table->next != NULL)
+	else if (g_ctrl_c == FALSE && table != NULL && table->next != NULL)
 	{
 		shell->exec_on_pipe = TRUE;
 		exec_pipes(table, shell);

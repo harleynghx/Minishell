@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 18:58:28 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:02:27 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:16:42 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:52 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 calculating and checking the exit code
 if its bigger than 255, then the exit code = code % 256
-if it is negative exit code = 256 - code
+if it is negative exit	code = 256 - code
 */
 bool	is_exit_code_correct(t_shell *shell, char *args, int i)
 {

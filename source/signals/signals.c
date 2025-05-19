@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 20:01:04 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:06:27 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:19:27 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:19:31 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	signals(struct termios *mirror_termios)
 
 void	save_settings_and_remove_c(struct termios *mirror_termios)
 {
-	struct termios		termios_settings;
+	struct termios	termios_settings;
 
 	tcgetattr(1, mirror_termios);
 	tcgetattr(1, &termios_settings);

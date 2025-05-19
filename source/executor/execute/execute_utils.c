@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 09:08:32 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:03:56 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:17:48 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:17 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ char	**copy_2d_char_array(char **array)
 	return (result);
 }
 
-//in case of  no path (path == null) return the correct error
+// in case of  no path (path == null) return the correct error
 void	clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table)
 {
 	while (table->next != NULL)
 		table = table->next;
-	if (strcmp_2(table->cmd, "cat") == TRUE
-		&& strcmp_2(table->cmd_args[1], "-e") == TRUE && table->next == NULL)
+	if (strcmp_2(table->cmd, "cat") == TRUE && strcmp_2(table->cmd_args[1],
+			"-e") == TRUE && table->next == NULL)
 	{
 		free(cmd_path);
 		free_at_child(shell);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 20:10:01 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:04:19 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:18:22 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:00 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token)
 {
-	int		fd;
+	int	fd;
 
 	if (is_last_heredoc(token, table->redirs) == false)
 		return (-99);

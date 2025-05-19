@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 11:34:04 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:03:52 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:19 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute_command(t_cmd_tbl *table, t_shell *shell)
 
 void	exit_after_builtin(t_shell *shell)
 {
-	int		exit_code;
+	int	exit_code;
 
 	exit_code = shell->exit_code;
 	free_at_child(shell);
@@ -64,7 +64,7 @@ void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 	}
 }
 
-//check if the cmd is a directory
+// check if the cmd is a directory
 bool	is_a_directory(t_shell *shell, char *cmd)
 {
 	int	i;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/03 10:02:53 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:02:17 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:16:31 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:56 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env	*init_env_node(char *str)
 	return (env_node);
 }
 
-void	add_back_env_node(t_env	*head, t_env *new)
+void	add_back_env_node(t_env *head, t_env *new)
 {
 	t_env	*curr;
 

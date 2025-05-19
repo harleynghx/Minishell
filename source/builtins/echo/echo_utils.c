@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 18:45:07 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:02:09 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:16:17 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:21:01 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	space_filled_token(char *str)
 	return (TRUE);
 }
 
-//MAYBE IMPROVE THIS BEAUTY OVER HERE
+// MAYBE IMPROVE THIS BEAUTY OVER HERE
 void	print_without_quotes(char *str, int i, int k, int dq)
 {
 	int	q;
