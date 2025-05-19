@@ -1,5 +1,7 @@
 CC				= cc
-SRC_DIR			= source/
+# SRC_DIR			= source/
+EXE_DIR			= execution/
+PAR_DIR			= parsing/
 OBJ_DIR			= obj/
 RM				= rm -rf
 NAME			= minishell
@@ -83,7 +85,18 @@ GENERAL_UTILS	= general_utils/error \
 SOURCE			= $(MAIN) $(INIT) $(SIGNALS) $(EXPANDER) $(LEXER) $(PARSER) \
 				  $(EXECUTOR) $(BUILTINS) $(GENERAL_UTILS) $(CLEANUP_TOOLS) \
 
-SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
+$(OBJ_DIR)%.o : $(EXE_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+$(OBJ_DIR)%.o : $(PAR_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+
+# SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
+EXE				= $(addprefix $(EXE_DIR), $(addsuffix .c, $(SOURCE)))
+PAR				= $(addprefix $(PAR_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 
 ifeq ($(OS), Linux)
