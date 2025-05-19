@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 13:59:14 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:14:04 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ bool		convert_to_lower(char *str, int until);
 //ERROR HANDLING
 void		print_in(void);
 void		print_shell(void);
-void		how_to_use(int argc);
+void		ft_arg(int argc);
 bool		syntax_error(char c);
 bool		syntax_error_newline(void);
 
