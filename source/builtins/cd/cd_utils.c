@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 10:44:38 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/03 11:11:52 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/19 14:01:38 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:01:40 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../../includes/minishell.h"
 

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:45:33 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/03 09:17:41 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/19 13:59:04 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 13:59:05 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef DEFINES_H
 # define DEFINES_H

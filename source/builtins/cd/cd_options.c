@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cd_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 14:20:09 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/03 11:46:27 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:01:34 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../../includes/minishell.h"
 

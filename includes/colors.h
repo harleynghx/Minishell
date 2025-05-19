@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/26 09:25:56 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/26 09:45:52 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/19 13:58:57 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:00:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef COLORS_H
 # define COLORS_H
