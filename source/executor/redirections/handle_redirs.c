@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 15:12:52 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:04:46 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:19:04 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:19:46 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void	handle_redirections(t_shell *shell, t_cmd_tbl *table)
 	}
 }
 
-bool	is_good_redirection(t_token	*token)
+bool	is_good_redirection(t_token *token)
 {
-	if (is_redirection(token)
-		&& token->next != NULL
+	if (is_redirection(token) && token->next != NULL
 		&& !is_redirection(token->next))
 		return (true);
 	return (false);

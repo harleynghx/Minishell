@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 15:54:56 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:04:42 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:18:57 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:19:48 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ bool	pipe_has_redirs(t_token *token)
 {
 	while (token != NULL)
 	{
-		if (token->type == APPEND
-			|| token->type == OUTPUT)
+		if (token->type == APPEND || token->type == OUTPUT)
 			return (true);
 		token = token->next;
 	}

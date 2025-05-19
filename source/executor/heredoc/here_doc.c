@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 22:47:23 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:04:13 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:02 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 	{
 		write(0, "> ", 2);
 		input = get_next_line(STDIN_FILENO);
-		if (g_ctrl_c == TRUE || input == NULL
-			|| (ft_strncmp(input, s_w, ft_strlen(s_w)) == 0
-				&& ((ft_strlen(input) - 1) == ft_strlen(s_w))))
+		if (g_ctrl_c == TRUE || input == NULL || (ft_strncmp(input, s_w,
+					ft_strlen(s_w)) == 0 && ((ft_strlen(input)
+						- 1) == ft_strlen(s_w))))
 		{
 			free(input);
 			break ;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 15:02:03 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:02:31 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:16:52 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:50 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	exit_shell(t_shell *shell, char *cmd, char **args)
 			return ;
 		}
 	}
-	else if (args[2] == NULL
-		&& args[1] != NULL)
+	else if (args[2] == NULL && args[1] != NULL)
 		exit_code_on_pipe(shell, args);
 }
 
@@ -52,9 +51,9 @@ void	exit_tma(t_shell *shell, char *cmd)
 
 void	exit_code(t_shell *shell, char **args)
 {
-	int		i;
-	int		len;
-	int		code;
+	int	i;
+	int	len;
+	int	code;
 
 	i = 5;
 	len = ft_strlen(args[1]);

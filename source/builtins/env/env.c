@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 14:54:54 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/19 14:02:21 by harleyng         ###   ########.fr       */
+/*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 14:20:53 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ void	env(t_shell *shell, char **args)
 				printf("%s=\n", curr->var_name);
 			else if (curr->content != NULL && shell->color_codes == TRUE)
 				printf("%s=%s\n", curr->var_name, curr->content);
-			else if (curr->content != NULL
-				&& strcmp_2(curr->var_name, "TERM") == FALSE
-				&& shell->color_codes == FALSE)
+			else if (curr->content != NULL && strcmp_2(curr->var_name,
+					"TERM") == FALSE && shell->color_codes == FALSE)
 				printf("%s=%s\n", curr->var_name, curr->content);
 			curr = curr->next;
 		}

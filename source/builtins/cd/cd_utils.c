@@ -6,10 +6,9 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:01:40 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:21:08 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../includes/minishell.h"
 
@@ -38,7 +37,7 @@ int	nb_delimited_words(char *s, char c)
 
 bool	strcmp_2(char *str1, char *str2)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (str1 == NULL || str2 == NULL)
