@@ -1,6 +1,6 @@
 CC				= cc
-SRC_DIR			= src/
-OBJ_DIR			= obj/
+SRC_DIR			= source/
+OBJ_DIR			= object/
 RM				= rm -rf
 NAME			= minishell
 DN				= > /dev/null
