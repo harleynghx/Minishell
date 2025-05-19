@@ -2,6 +2,7 @@ CC				= cc
 # SRC_DIR			= source/
 EXE_DIR			= execution/
 PAR_DIR			= parsing/
+SRC_DIR			= minishell_source/
 OBJ_DIR			= obj/
 RM				= rm -rf
 NAME			= minishell
@@ -97,6 +98,7 @@ $(OBJ_DIR)%.o : $(PAR_DIR)%.c
 # SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 EXE				= $(addprefix $(EXE_DIR), $(addsuffix .c, $(SOURCE)))
 PAR				= $(addprefix $(PAR_DIR), $(addsuffix .c, $(SOURCE)))
+SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 
 ifeq ($(OS), Linux)
