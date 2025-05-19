@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:34:36 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/03 12:11:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:02:34 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **env)
 {	
 	t_shell	shell;
 
-	how_to_use(argc);
+	ft_arg(argc);
 	init_shell(&shell, env);
 	shell_loop(&shell);
 	free_at_exit(&shell);
