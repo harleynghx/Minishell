@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 11:37:06 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/02 14:28:02 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/19 13:59:18 by harleyng          #+#    #+#             */
+/*   Updated: 2025/05/19 13:59:54 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
