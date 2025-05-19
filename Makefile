@@ -1,6 +1,6 @@
 CC				= cc
 SRC_DIR			= source/
-OBJ_DIR			= object/
+OBJ_DIR			= obj/
 RM				= rm -rf
 NAME			= minishell
 DN				= > /dev/null
@@ -90,8 +90,9 @@ ifeq ($(OS), Linux)
 INCL_RDL_HEADER	= -I /home/linuxbrew/.linuxbrew/opt/readline/include/readline
 INCL_RDL_LIB	= -lreadline -L /home/linuxbrew/.linuxbrew/opt/readline/lib
 else
-INCL_RDL_HEADER	= -I /Users/$(USER)/.brew/opt/readline/include
-INCL_RDL_LIB	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
+READLINE_PATH := $(shell brew --prefix readline)
+INCL_RDL_HEADER = -I $(READLINE_PATH)/include
+INCL_RDL_LIB = -L $(READLINE_PATH)/lib -lreadline
 endif
 
 BREW			= /Users/$(USER)/.brew/bin
@@ -118,7 +119,7 @@ readline_check:
 		echo "$(GREEN)READLINE is already installed in $(READLINE)$(DEF_COLOR)"; \
 	else \
 		{ \
-			echo "$(YELLOW)Installing Readline..."$(DEF_COLOR); \
+			echo "$(YELLOW)Installing Readline...$(DEF_COLOR)"; \
 			$(INSTALL_READL) \
 		}; \
 	fi
