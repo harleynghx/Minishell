@@ -3,7 +3,6 @@ CC				= cc
 MIN_DIR			= minishell_source/
 EXE_DIR			= execution/
 PAR_DIR			= parsing/
-SRC_DIR			= minishell_source/
 OBJ_DIR			= obj/
 RM				= rm -rf
 NAME			= minishell
