@@ -1,5 +1,6 @@
 CC				= cc
 # SRC_DIR			= source/
+MIN_DIR			= minishell_source/
 EXE_DIR			= execution/
 PAR_DIR			= parsing/
 SRC_DIR			= minishell_source/
@@ -86,16 +87,11 @@ GENERAL_UTILS	= general_utils/error \
 SOURCE			= $(MAIN) $(INIT) $(SIGNALS) $(EXPANDER) $(LEXER) $(PARSER) \
 				  $(EXECUTOR) $(BUILTINS) $(GENERAL_UTILS) $(CLEANUP_TOOLS) \
 
-$(OBJ_DIR)%.o : $(EXE_DIR)%.c
-	@mkdir -p $(@D)
-	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
-$(OBJ_DIR)%.o : $(PAR_DIR)%.c
-	@mkdir -p $(@D)
-	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
 
 # SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
+MIN				= $(addprefix $(MIN_DIR), $(addsuffix .c, $(SOURCE)))
 EXE				= $(addprefix $(EXE_DIR), $(addsuffix .c, $(SOURCE)))
 PAR				= $(addprefix $(PAR_DIR), $(addsuffix .c, $(SOURCE)))
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
@@ -114,9 +110,9 @@ BREW			= /Users/$(USER)/.brew/bin
 READLINE		= /Users/$(USER)/.brew/opt/readline/include/readline
 
 run: brew_check
-	@$(SLEEP)
-	@clear
-	@./$(NAME)
+# @$(SLEEP)
+# @clear
+# @./$(NAME)
 
 brew_check:
 	@if [ -d $(BREW) ]; then \
@@ -144,16 +140,24 @@ readline_check:
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@echo ""
-	@echo "$(YELLOW)  Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory Part By:$(DEF_COLOR) $(RED)Mr. Minishell Community$(DEF_COLOR)"
-	@echo "$(CYAN2)" $(DN)
-	@$(CC) $(CFLAGS) $(OBJ) $(INCL_RDL_LIB) $(LIBFT) -lreadline -o minishell $(DN)
+	@$(CC) $(CFLAGS) $(OBJ) $(INCL_RDL_LIB) $(LIBFT) -o minishell $(DN)
 	@cd obj/general_utils && touch user.txt && echo $$USER > user.txt
-	@echo "$(PURPLE)                       $(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+$(OBJ_DIR)%.o : $(EXE_DIR)%.c
 	@mkdir -p $(@D)
 	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+$(OBJ_DIR)%.o : $(PAR_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+$(OBJ_DIR)%.o : $(MIN_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+# $(OBJ_DIR)%.o : $(SRC_DIR)%.c
+# 	@mkdir -p $(@D)
+# 	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
