@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:18 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 13:59:54 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:06:11 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,27 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	int				print;
-	char			**env;
 	int				envless;
-	char			*prompt;
+	int				color_codes;
+	t_env			*env_head;
+	char			*user_name;
+	char			**cmd_paths;
+	char			**env;
+	int				exit_code;
+	int				print;
 	char			*heredoc;
 	t_cmd_tbl		*cmd_tbls;
-	t_env			*env_head;
-	int				exit_code;
-	int				std_fds[2];
-	char			*user_name;
-	int				color_codes;
-	char			**cmd_paths;
 	char			*prev_prompt;
+	char			*trimmed_prompt;
+	char			*terminal_prompt;
+	int				cmd_has_been_executed;
+	char			*prompt;
+	int				std_fds[2];
 	int				exec_on_pipe;
 	int				should_expand;
 	int				should_execute;
 	int				expand_heredoc;
 	struct termios	mirror_termios;
-	char			*trimmed_prompt;
-	char			*terminal_prompt;
-	int				cmd_has_been_executed;
 }	t_shell;
 
 #endif
