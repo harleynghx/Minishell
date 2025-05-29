@@ -6,35 +6,13 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:50 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:27:11 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-bool	tables_have_wrong_redir(t_cmd_tbl *table, t_shell *shell)
-{
-	bool		flag;
-	t_cmd_tbl	*curr;
-
-	flag = false;
-	curr = table;
-	while (curr != NULL && flag == false)
-	{
-		flag = has_heredoc_and_wrong_redir(curr->redirs);
-		if (flag == true)
-			break ;
-		curr = curr->next;
-	}
-	if (flag == true && curr != NULL)
-	{
-		run_only_heredocs(table, curr, shell);
-		return (true);
-	}
-	return (false);
-}
-
-bool	has_heredoc_and_wrong_redir(t_token *token)
+static bool	invalid_redirection(t_token *token)
 {
 	while (token != NULL)
 	{
@@ -44,8 +22,7 @@ bool	has_heredoc_and_wrong_redir(t_token *token)
 	}
 	return (false);
 }
-
-void	run_only_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *sh)
+static void	initiate_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *sh)
 {
 	t_token	*token;
 	char	*tmp;
@@ -69,3 +46,26 @@ void	run_only_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *sh)
 		start = start->next;
 	}
 }
+bool	validate_redir_initiate_heredocs(t_cmd_tbl *table, t_shell *shell)
+{
+	bool		flag;
+	t_cmd_tbl	*current_tbl;
+
+	flag = false;
+	current_tbl = table;
+	while (current_tbl != NULL && flag == false)
+	{
+		flag = invalid_redirection(current_tbl->redirs);
+		if (flag == true)
+			break ;
+		current_tbl = current_tbl->next;
+	}
+	if (flag == true && current_tbl != NULL)
+	{
+		initiate_heredocs(table, current_tbl, shell);
+		return (true);
+	}
+	return (false);
+}
+
+

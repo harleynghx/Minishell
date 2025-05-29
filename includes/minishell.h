@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:14:04 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:26:36 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,7 @@ int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
 
 //INITIALIZE
-char		*extract_user(t_shell *shell);
 void		init_shell(t_shell *shell, char **env);
-void		init_missing_environment(t_shell *shell, char **env);
-
 //SIGNALS
 void		signal_ctrl_c(void);
 void		signals_parent(void);
@@ -263,9 +260,7 @@ bool		is_last_heredoc(t_token *token, t_token *redirs);
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 	//PIPELINE
 		//EXEC ONLY HEREDOC
-bool		has_heredoc_and_wrong_redir(t_token *token);
-bool		tables_have_wrong_redir(t_cmd_tbl *table, t_shell *shell);
-void		run_only_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *shll);
+bool		validate_redir_initiate_heredocs(t_cmd_tbl *table, t_shell *shell);
 void		execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end);
 		//EXEC PIPES
 bool		pipe_has_redirs(t_token *token);
@@ -287,8 +282,6 @@ int			skip_spaces(char *str, int index);
 bool		convert_to_lower(char *str, int until);
 
 //ERROR HANDLING
-void		print_in(void);
-void		print_shell(void);
 void		ft_arg(int argc);
 bool		syntax_error(char c);
 bool		syntax_error_newline(void);
