@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/28 18:27:11 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:37:01 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,3 @@ bool	validate_redir_initiate_heredocs(t_cmd_tbl *table, t_shell *shell)
 	}
 	return (false);
 }
-
-

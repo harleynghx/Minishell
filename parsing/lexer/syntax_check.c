@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:47:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/03 09:40:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:39:41 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	redir_check(char *str)
+bool	contains_triple_redirection(char *str)
 {
 	int	i;
 

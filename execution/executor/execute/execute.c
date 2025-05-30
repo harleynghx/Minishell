@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/28 18:24:47 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:40:24 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute(t_shell *shell, t_cmd_tbl *table)
 {
 	if (validate_redir_initiate_heredocs(table, shell) == true)
 	{
-		redir_check(shell->trimmed_prompt);
+		contains_triple_redirection(shell->trimmed_prompt);
 		shell->exit_code = 258;
 		free_cmd_tbls(shell->cmd_tbls);
 		shell->cmd_tbls = NULL;
