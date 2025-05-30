@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/29 20:37:01 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:49:44 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	initiate_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *sh)
 		start = start->next;
 	}
 }
-bool	validate_redir_initiate_heredocs(t_cmd_tbl *table, t_shell *shell)
+bool	invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell)
 {
 	bool		flag;
 	t_cmd_tbl	*current_tbl;

@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/30 17:40:24 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:48:10 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ execute commands on a pipeline
 */
 void	execute(t_shell *shell, t_cmd_tbl *table)
 {
-	if (validate_redir_initiate_heredocs(table, shell) == true)
+	if (invalid_redir_and_initiate_heredocs(table, shell) == true)
 	{
 		contains_triple_redirection(shell->trimmed_prompt);
 		shell->exit_code = 258;

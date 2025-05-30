@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:47:49 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/30 17:39:41 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:00:01 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 bool	contains_triple_redirection(char *str)
 {
+	int	len;
 	int	i;
 
+	if (!str)
+		return (false);
+	len = ft_strlen(str);
+	if (len < 3)
+		return (false);
 	i = 0;
-	while (ft_strlen(str) > 2 && i != ft_strlen(str) - 2)
+	while (i <= len - 3)
 	{
-		if (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>')
-			return (syntax_error(str[i]), TRUE);
+		if ((str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>')
+			|| (str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<'))
+		{
+			syntax_error(str[i]);
+			return (true);
+		}
 		i++;
 	}
-	i = 0;
-	while (ft_strlen(str) > 2 && i != ft_strlen(str) - 2)
-	{
-		if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
-			return (syntax_error(str[i]), TRUE);
-		i++;
-	}
-	return (FALSE);
+	return (false);
 }
 
 bool	has_wrong_pipe(char *str)
