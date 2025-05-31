@@ -6,56 +6,56 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:02 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:31:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static bool	cmd_tbl_has_heredoc(t_cmd_tbl *cmd_tbl)
+{
+	t_token	*token;
+
+	if (cmd_tbl == NULL)
+		return (FALSE);
+	token = cmd_tbl->redirs;
+	while (token != NULL)
+	{
+		if (token->type == HEREDOC)
+			return (TRUE);
+		token = token->next;
+	}
+	return (FALSE);
+}
+static void	execute_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
+{
+	t_token	*token;
+	char	*tmp;
+
+	token = cmd_tbl->redirs;
+	while (token != NULL)
+	{
+		if (token->type == HEREDOC)
+		{
+			tmp = stop_word(token->next->content, shell);
+			free(token->next->content);
+			token->next->content = tmp;
+			cmd_tbl->heredoc_name = heredoc(cmd_tbl, token->next->content,
+					shell);
+		}
+		token = token->next;
+	}
+}
 void	handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 {
 	while (cmd_tbl != NULL)
 	{
-		if (cmd_tbl_has_heredoc(cmd_tbl) == true)
+		if (cmd_tbl_has_heredoc(cmd_tbl) == TRUE)
 			execute_heredocs(cmd_tbl, shell);
 		cmd_tbl = cmd_tbl->next;
 	}
 }
 
-bool	cmd_tbl_has_heredoc(t_cmd_tbl *cmd_tbl)
-{
-	t_token	*token;
-
-	if (cmd_tbl == NULL)
-		return (false);
-	token = cmd_tbl->redirs;
-	while (token != NULL)
-	{
-		if (token->type == HEREDOC)
-			return (true);
-		token = token->next;
-	}
-	return (false);
-}
-
-void	execute_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
-{
-	t_token	*tk;
-	char	*tmp;
-
-	tk = cmd_tbl->redirs;
-	while (tk != NULL)
-	{
-		if (tk->type == HEREDOC)
-		{
-			tmp = stop_word(tk->next->content, shell);
-			free(tk->next->content);
-			tk->next->content = tmp;
-			cmd_tbl->heredoc_name = heredoc(cmd_tbl, tk->next->content, shell);
-		}
-		tk = tk->next;
-	}
-}
 
 char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 {

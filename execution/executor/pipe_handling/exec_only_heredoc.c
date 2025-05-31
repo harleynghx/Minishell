@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/30 17:49:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/31 03:30:32 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static bool	invalid_redirection(t_token *token)
 {
 	while (token != NULL)
 	{
-		if (is_good_redirection(token) == false)
-			return (true);
+		if (is_good_redirection(token) == FALSE)
+			return (TRUE);
 		token = token->next->next;
 	}
-	return (false);
+	return (FALSE);
 }
 static void	initiate_heredocs(t_cmd_tbl *start, t_cmd_tbl *last, t_shell *sh)
 {
@@ -51,19 +51,19 @@ bool	invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell)
 	bool		flag;
 	t_cmd_tbl	*current_tbl;
 
-	flag = false;
+	flag = FALSE;
 	current_tbl = table;
-	while (current_tbl != NULL && flag == false)
+	while (current_tbl != NULL && flag == FALSE)
 	{
 		flag = invalid_redirection(current_tbl->redirs);
-		if (flag == true)
+		if (flag == TRUE)
 			break ;
 		current_tbl = current_tbl->next;
 	}
-	if (flag == true && current_tbl != NULL)
+	if (flag == TRUE && current_tbl != NULL)
 	{
 		initiate_heredocs(table, current_tbl, shell);
-		return (true);
+		return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
