@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 02:53:38 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/21 02:53:41 by liyu-her         ###   ########.fr       */
+/*   Created: 2023/03/05 14:31:10 by zstenger          #+#    #+#             */
+/*   Updated: 2025/05/28 18:10:44 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,18 @@
 
 void	terminal_prompt(t_shell *shell)
 {
-	char	*half;
 	char	*full;
-	char	*username;
-	char	*curr_dir;
 	char	*directory;
 
 	if (shell->terminal_prompt != NULL)
 		free(shell->terminal_prompt);
-	curr_dir = get_curr_dir(shell);
-	if (shell->cmd_has_been_executed == TRUE)
-		username = ft_nm_strjoin(G_ARROW_SIGN, shell->user_name);
-	else
-		username = ft_nm_strjoin(R_ARROW_SIGN, shell->user_name);
-	directory = ft_nm_strjoin(SPACE_SIGN, curr_dir);
-	half = ft_nm_strjoin(username, directory);
-	full = ft_nm_strjoin(half, X_SIGN);
-	free(directory);
-	free(username);
-	free(curr_dir);
-	free(half);
+	directory = curr_dir(shell);
+	full = ft_nm_strjoin(directory, " > ");
 	shell->terminal_prompt = full;
 	shell->cmd_has_been_executed = TRUE;
 }
 
-char	*get_curr_dir(t_shell *shell)
+char	*curr_dir(t_shell *shell)
 {
 	int		i;
 	t_env	*pwd;

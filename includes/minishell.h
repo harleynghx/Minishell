@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:14:04 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:50:31 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		addhistory(t_shell *shell);
 // bool		is_builtin(t_shell *shell);
 
 //PROMPT
-char		*get_curr_dir(t_shell *shell);
+char		*curr_dir(t_shell *shell);
 void		terminal_prompt(t_shell *shell);
 
 //BUILTINS
@@ -134,21 +134,19 @@ int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
 
 //INITIALIZE
-char		*extract_user(t_shell *shell);
 void		init_shell(t_shell *shell, char **env);
-void		init_missing_environment(t_shell *shell, char **env);
 
 //SIGNALS
-void		signal_ctrl_c(void);
+void		signal_c(void);
 void		signals_parent(void);
 void		signal_ctrl_c_child(void);
 void		signal_ctrl_c_parent(void);
-void		signal_ctrl_backslash(void);
+void		signal_backslash(void);
 void		handle_sigint(int sig_num);
 void		signal_ctrl_backslash_child(void);
 void		signals(struct termios *mirror_termios);
 void		signals_child(struct termios *mirror_termios);
-void		save_settings_and_remove_c(struct termios *mirror_termios);
+void		handle_signals(struct termios *mirror_termios);
 
 //LEXER
 bool		is_space(char c);
@@ -159,7 +157,7 @@ bool		bad_pipe(t_shell *shell);
 bool		has_wrong_pipe(char *str);
 bool		redir_before(char *str, int i);
 bool		wrong_operator_check(char *str);
-bool		is_empty_line_passed(t_shell *shll);
+bool		is_emptyline(t_shell *shll);
 char		count_quotes(char *s, int sq, int dq);
 int			nb_esc_chars(char *str, int last_ind);
 char		*ft_strdup2(char *str, int start, int end);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:27 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:31 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:45:57 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	signals(struct termios *mirror_termios)
 {
 	g_ctrl_c = FALSE;
-	save_settings_and_remove_c(mirror_termios);
-	signal_ctrl_backslash();
-	signal_ctrl_c();
+	handle_signals(mirror_termios);
+	signal_backslash();
+	signal_c();
 }
 
-void	save_settings_and_remove_c(struct termios *mirror_termios)
+void	handle_signals(struct termios *mirror_termios)
 {
 	struct termios	termios_settings;
 
@@ -30,7 +30,7 @@ void	save_settings_and_remove_c(struct termios *mirror_termios)
 	tcsetattr(1, TCSAFLUSH, &termios_settings);
 }
 
-void	signal_ctrl_c(void)
+void	signal_c(void)
 {
 	struct sigaction	ctrl_c;
 
@@ -40,14 +40,14 @@ void	signal_ctrl_c(void)
 	sigaction(SIGINT, &ctrl_c, NULL);
 }
 
-void	signal_ctrl_backslash(void)
+void	signal_backslash(void)
 {
-	struct sigaction	ctrl_back_slash;
+	struct sigaction	ctrl_backslash;
 
-	ctrl_back_slash.sa_handler = SIG_IGN;
-	ctrl_back_slash.sa_flags = SA_RESTART;
-	sigemptyset(&ctrl_back_slash.sa_mask);
-	sigaction(SIGQUIT, &ctrl_back_slash, NULL);
+	ctrl_backslash.sa_handler = SIG_IGN;
+	ctrl_backslash.sa_flags = SA_RESTART;
+	sigemptyset(&ctrl_backslash.sa_mask);
+	sigaction(SIGQUIT, &ctrl_backslash, NULL);
 }
 
 void	handle_sigint(int sig_num)

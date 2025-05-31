@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   fpf_putstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 12:13:51 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/17 13:55:59 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/31 18:19:20 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/05/31 18:19:21 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include	"../../includes/fprintf.h"
 

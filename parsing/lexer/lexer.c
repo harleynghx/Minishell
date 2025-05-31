@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 05:30:02 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/22 05:30:04 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:50:00 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	lexer(t_shell *shell)
 {
 	if (ft_strlen(shell->trimmed_prompt) == 0
-		|| is_empty_line_passed(shell) == TRUE)
+		|| is_emptyline(shell) == TRUE)
 		return (FALSE);
 	else if (bad_pipe(shell) == TRUE)
 		return (FALSE);
@@ -33,7 +33,7 @@ int	lexer(t_shell *shell)
 }
 
 // eg prompt -> ""
-bool	is_empty_line_passed(t_shell *s)
+bool	is_emptyline(t_shell *s)
 {
 	if (s->trimmed_prompt[0] == '~' && ft_strlen(s->trimmed_prompt) == 1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_parent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:23 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:34 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:54:57 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	signals_parent(void)
 {
 	signal_ctrl_c_parent();
-	signal_ctrl_backslash();
+	signal_backslash();
 }
 
 void	handle_sigint_parent(int sig_num)

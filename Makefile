@@ -12,14 +12,13 @@ OS				= $(shell uname)
 USER			= $(shell whoami)
 SLEEP			= $(shell sleep 2)
 CFLAGS			= -Wall -Werror -Wextra
-INSTALL_READL	= $(shell brew install readline)
+# INSTALL_READL	= $(shell brew install readline)
 
 #DELETE THE PRINT FUNCTIONS FILE
 MAIN			= main/prompt \
 				  main/minishell \
 				  main/shell_loop \
 				  main/main_utils \
-				  main/print_functions \
 
 BUILTINS		= builtins/cd/cd \
 				  builtins/env/env \

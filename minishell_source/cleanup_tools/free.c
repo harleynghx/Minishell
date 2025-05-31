@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:36 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:23 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:51:14 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	free_at_exit(t_shell *shell)
 {
 	t_token	*token;
 
-	// if (shell->print == FALSE)
-	// 	printf("exit\n");
 	if (shell->trimmed_prompt != NULL)
 		free_cmd_tbls(shell->cmd_tbls);
 	free_char_array(shell->cmd_paths);
