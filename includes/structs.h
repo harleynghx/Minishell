@@ -6,10 +6,9 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:18 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 13:59:54 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:50:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -24,15 +23,15 @@ typedef enum e_type
 	APPEND,
 	INPUT,
 	UNKNOWN
-}	t_type;
+}						t_type;
 
 typedef struct s_token
 {
-	t_type			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-	char			*content;
-}	t_token;
+	t_type				type;
+	struct s_token		*next;
+	struct s_token		*prev;
+	char				*content;
+}						t_token;
 
 typedef struct s_cmd_tbl
 {
@@ -43,38 +42,38 @@ typedef struct s_cmd_tbl
 	t_token				*redirs;
 	char				**cmd_args;
 	char				*heredoc_name;
-}	t_cmd_tbl;
+}						t_cmd_tbl;
 
 typedef struct s_env
 {
-	struct s_env	*next;
-	char			*content;
-	char			*var_name;
-}	t_env;
+	struct s_env		*next;
+	char				*content;
+	char				*var_name;
+}						t_env;
 
 typedef struct s_shell
 {
-	int				print;
-	char			**env;
-	int				envless;
-	char			*prompt;
-	char			*heredoc;
-	t_cmd_tbl		*cmd_tbls;
-	t_env			*env_head;
-	int				exit_code;
-	int				std_fds[2];
-	char			*user_name;
-	int				color_codes;
-	char			**cmd_paths;
-	char			*prev_prompt;
-	int				exec_on_pipe;
-	int				should_expand;
-	int				should_execute;
-	int				expand_heredoc;
-	struct termios	mirror_termios;
-	char			*trimmed_prompt;
-	char			*terminal_prompt;
-	int				cmd_has_been_executed;
-}	t_shell;
+	int					print;
+	char				**env;
+	int					envless;
+	char				*prompt;
+	char				*heredoc;
+	t_cmd_tbl			*cmd_tbls;
+	t_env				*env_head;
+	int					exit_code;
+	int					std_fds[2];
+	char				*user_name;
+	int					color_codes;
+	char				**cmd_paths;
+	char				*prev_prompt;
+	int					exec_on_pipe;
+	int					should_expand;
+	int					should_execute;
+	int					expand_heredoc;
+	struct termios		mirror_termios;
+	char				*trimmed_prompt;
+	char				*terminal_prompt;
+	int					cmd_has_been_executed;
+}						t_shell;
 
 #endif

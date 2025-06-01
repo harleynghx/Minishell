@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/31 18:31:04 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:50:17 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ static bool	cmd_tbl_has_heredoc(t_cmd_tbl *cmd_tbl)
 	}
 	return (FALSE);
 }
+static char	*filename(t_cmd_tbl *table)
+{
+	char	*tmp;
+	char	*tmp1;
+	char	*i;
+	
+	if (table->heredoc_name != NULL)
+	{
+		unlink(table->heredoc_name);
+		return (table->heredoc_name);
+	}
+	i = ft_itoa(table->index);
+	tmp = ft_nm_strjoin(TMP_S, i);
+	free(i);
+	tmp1 = ft_nm_strjoin(tmp, TMP_E);
+	free(tmp);
+	unlink(tmp1);
+	return (tmp1);
+}
+
 static void	execute_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 {
 	t_token	*token;
@@ -46,17 +66,6 @@ static void	execute_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 		token = token->next;
 	}
 }
-void	handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
-{
-	while (cmd_tbl != NULL)
-	{
-		if (cmd_tbl_has_heredoc(cmd_tbl) == TRUE)
-			execute_heredocs(cmd_tbl, shell);
-		cmd_tbl = cmd_tbl->next;
-	}
-}
-
-
 char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 {
 	int		fd;
@@ -86,22 +95,12 @@ char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 	return (close(fd), cmd_tbl->heredoc_name);
 }
 
-char	*filename(t_cmd_tbl *table)
+void	handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 {
-	char	*tmp;
-	char	*tmp1;
-	char	*i;
-
-	if (table->heredoc_name != NULL)
+	while (cmd_tbl != NULL)
 	{
-		unlink(table->heredoc_name);
-		return (table->heredoc_name);
+		if (cmd_tbl_has_heredoc(cmd_tbl) == TRUE)
+			execute_heredocs(cmd_tbl, shell);
+		cmd_tbl = cmd_tbl->next;
 	}
-	i = ft_itoa(table->index);
-	tmp = ft_nm_strjoin(TMP_S, i);
-	free(i);
-	tmp1 = ft_nm_strjoin(tmp, TMP_E);
-	free(tmp);
-	unlink(tmp1);
-	return (tmp1);
 }

@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/31 18:30:21 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:31:20 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,6 @@ int			open_file(t_type type, char *file_name, t_shell *shell);
 bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
 bool		change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val);
 // HEREDOC EXEC
-char		*filename(t_cmd_tbl *table);
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
