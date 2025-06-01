@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/01 16:31:20 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:32:09 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,9 +222,7 @@ void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
 void		execute(t_shell *shell, t_cmd_tbl *table);
-void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);
-void		simple_exec_in_child(t_shell *shell, t_cmd_tbl *table);
-// EXECUTE CMD
+void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);// EXECUTE CMD
 void		exit_after_builtin(t_shell *shell);
 void		execute_command(t_cmd_tbl *table, t_shell *shell);
 void		final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/01 18:50:17 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:23:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*filename(t_cmd_tbl *table)
 	char	*tmp;
 	char	*tmp1;
 	char	*i;
-	
+
 	if (table->heredoc_name != NULL)
 	{
 		unlink(table->heredoc_name);

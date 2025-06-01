@@ -6,12 +6,23 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:20:09 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:11 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:32:25 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static void	simple_exec_in_child(t_shell *shell, t_cmd_tbl *table)
+{
+	signals_child(&shell->mirror_termios);
+	if (has_wrong_redir(shell, table->redirs, table) == false)
+	{
+		shell->print = TRUE;
+		handle_redirections(shell, table);
+		execute_command(table, shell);
+	}
+	child_exit(shell);
+}
 void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 {
 	int		status;
@@ -36,14 +47,3 @@ void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 		shell->exit_code = 258;
 }
 
-void	simple_exec_in_child(t_shell *shell, t_cmd_tbl *table)
-{
-	signals_child(&shell->mirror_termios);
-	if (has_wrong_redir(shell, table->redirs, table) == false)
-	{
-		shell->print = TRUE;
-		handle_redirections(shell, table);
-		execute_command(table, shell);
-	}
-	child_exit(shell);
-}
