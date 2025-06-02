@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:18 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 15:36:29 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:50:44 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -24,7 +23,7 @@ typedef enum e_type
 	APPEND,
 	INPUT,
 	UNKNOWN
-}	t_type;
+}						t_type;
 
 typedef struct s_token
 {

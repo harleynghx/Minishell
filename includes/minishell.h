@@ -6,9 +6,10 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:37:51 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:54:58 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -51,8 +52,8 @@ void		shell_loop(t_shell *shell);
 void		addhistory(t_shell *shell);
 // bool		is_builtin(t_shell *shell);
 
-// PROMPT
-char		*get_curr_dir(t_shell *shell);
+//PROMPT
+char		*curr_dir(t_shell *shell);
 void		terminal_prompt(t_shell *shell);
 
 // BUILTINS
@@ -131,10 +132,11 @@ void		echo(t_shell *shell, char *cmd, char **args);
 int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
 
-// INITIALIZE
+//INITIALIZE
 void		init_shell(t_shell *shell, char **env);
-// SIGNALS
-void		signal_ctrl_c(void);
+
+//SIGNALS
+void		signal_c(void);
 void		signals_parent(void);
 void		signal_ctrl_c_child(void);
 void		signal_ctrl_c_parent(void);
@@ -165,8 +167,8 @@ bool		table_check(t_cmd_tbl *tables);
 // PIPE TOKENS
 int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
-char		**split_with_pipes(char *str, int start, int end, int index);
-// COMMAND TABLE
+char		**split_pipes(char *str, int start, int end, int index);
+	//COMMAND TABLE
 char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
 void		cmd_to_lover_case(t_cmd_tbl *table);
@@ -174,8 +176,8 @@ void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
 void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
-t_token		*split_elements_to_tokens(char *str, t_token *token);
-// INIT TABLE
+t_token		*tokenize(char *str, t_token *token);
+	//INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_redirs(t_cmd_tbl *cmd_tbl, t_token *token);
@@ -186,12 +188,12 @@ bool		is_printable(char c);
 t_cmd_tbl	*get_empty_cmd_table(void);
 int			token_list_size(t_token *token);
 t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new);
-// ADD TOKEN
-t_token		*add_flag_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_word_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_quote_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_redirection_token(char *str, int *i, int *old_i, t_token *tk);
-// ADD TOKEN UTILS
+	//ADD TOKEN
+t_token		*token_flag(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_word(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_quote(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_redir(char *str, int *i, int *old_i, t_token *tk);
+	//ADD TOKEN UTILS
 t_token		*copy_token(t_token *token);
 t_token		*get_new_token(char *str, t_type type);
 t_token		*add_new_token2(t_token *tokens, t_token *new);
@@ -222,9 +224,7 @@ void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
 void		execute(t_shell *shell, t_cmd_tbl *table);
-void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);
-void		simple_exec_in_child(t_shell *shell, t_cmd_tbl *table);
-// EXECUTE CMD
+void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);// EXECUTE CMD
 void		exit_after_builtin(t_shell *shell);
 void		execute_command(t_cmd_tbl *table, t_shell *shell);
 void		final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell);
@@ -247,17 +247,14 @@ int			open_file(t_type type, char *file_name, t_shell *shell);
 bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
 bool		change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val);
 // HEREDOC EXEC
-char		*filename(t_cmd_tbl *table);
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
 // OPEN HEREDOC
-bool		is_last_heredoc(t_token *token, t_token *redirs);
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE
 // EXEC ONLY HEREDOC
 bool		invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell);
-void		execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end);
 // EXEC PIPES
 bool		pipe_has_redirs(t_token *token);
 void		exec_pipes(t_cmd_tbl *table, t_shell *shell);

@@ -6,36 +6,13 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:42 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:20:34 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-bool	has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table)
-{
-	t_token	*wrong;
-	t_token	*curr;
-
-	wrong = token;
-	while (wrong != NULL)
-	{
-		if (is_redirection(wrong) == false)
-		{
-			wrong = wrong->next;
-			continue ;
-		}
-		if (is_good_redirection(wrong) == false)
-			break ;
-		wrong = wrong->next->next;
-	}
-	if (wrong == NULL)
-		return (false);
-	execute_only_heredocs(shell, table, wrong);
-	return (true);
-}
-
-void	execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end)
+static void	execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end)
 {
 	t_token	*start;
 	char	*tmp;
@@ -52,4 +29,25 @@ void	execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end)
 		}
 		start = start->next;
 	}
+}
+bool	has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table)
+{
+	t_token	*current_token;
+
+	current_token = token;
+	while (current_token != NULL)
+	{
+		if (is_redirection(current_token) == FALSE)
+		{
+			current_token = current_token->next;
+			continue ;
+		}
+		if (is_good_redirection(current_token) == FALSE)
+			break ;
+		current_token = current_token->next->next;
+	}
+	if (current_token == NULL)
+		return (FALSE);
+	execute_only_heredocs(shell, table, current_token);
+	return (TRUE);
 }
