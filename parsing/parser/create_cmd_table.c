@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd_table.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 08:29:18 by jergashe          #+#    #+#             */
-/*   Updated: 2023/04/01 10:06:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:41:01 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell)
 	while (str_arr[i] != NULL)
 	{
 		token = NULL;
-		token = split_elements_to_tokens(str_arr[i++], token);
+		token = tokenize(str_arr[i++], token);
 		cmd_tbls = init_cmd_table(cmd_tbls, token);
 		free_tokens(token);
 	}

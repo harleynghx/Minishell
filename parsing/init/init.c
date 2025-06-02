@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 08:17:42 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/20 13:41:54 by liyu-her         ###   ########.fr       */
+/*   Created: 2025/05/20 15:03:18 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/05/21 02:19:16 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	init_shell(t_shell *shell, char **env)
 {
-	t_token	token;
-
-
 	shell->envless = FALSE;
 	shell->color_codes = TRUE;
 	shell->env_head = init_env(env);

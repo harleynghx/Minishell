@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 21:48:30 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:48:44 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void		shell_loop(t_shell *shell);
 void		addhistory(t_shell *shell);
 // bool		is_builtin(t_shell *shell);
 
-// PROMPT
-char		*get_curr_dir(t_shell *shell);
+//PROMPT
+char		*curr_dir(t_shell *shell);
 void		terminal_prompt(t_shell *shell);
 
 // BUILTINS
@@ -131,19 +131,20 @@ void		echo(t_shell *shell, char *cmd, char **args);
 int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
 
-// INITIALIZE
+//INITIALIZE
 void		init_shell(t_shell *shell, char **env);
-// SIGNALS
-void		signal_ctrl_c(void);
+
+//SIGNALS
+void		signal_c(void);
 void		signals_parent(void);
 void		signal_ctrl_c_child(void);
 void		signal_ctrl_c_parent(void);
-void		signal_ctrl_backslash(void);
+void		signal_backslash(void);
 void		handle_sigint(int sig_num);
 void		signal_ctrl_backslash_child(void);
 void		signals(struct termios *mirror_termios);
 void		signals_child(struct termios *mirror_termios);
-void		save_settings_and_remove_c(struct termios *mirror_termios);
+void		handle_signals(struct termios *mirror_termios);
 
 // LEXER
 bool		is_space(char c);
@@ -154,8 +155,8 @@ bool		bad_pipe(t_shell *shell);
 bool		has_wrong_pipe(char *str);
 bool		redir_before(char *str, int i);
 bool		wrong_operator_check(char *str);
-bool		is_empty_line_passed(t_shell *shll);
-char		count_quotes(char *s, int sq, int dq);
+bool		is_emptyline(t_shell *shll);
+bool		count_quotes(char *s, int sq, int dq);
 int			nb_esc_chars(char *str, int last_ind);
 char		*ft_strdup2(char *str, int start, int end);
 
@@ -165,8 +166,8 @@ bool		table_check(t_cmd_tbl *tables);
 // PIPE TOKENS
 int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
-char		**split_with_pipes(char *str, int start, int end, int index);
-// COMMAND TABLE
+char		**split_pipes(char *str, int start, int end, int index);
+	//COMMAND TABLE
 char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
 void		cmd_to_lover_case(t_cmd_tbl *table);
@@ -174,8 +175,8 @@ void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
 void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
-t_token		*split_elements_to_tokens(char *str, t_token *token);
-// INIT TABLE
+t_token		*tokenize(char *str, t_token *token);
+	//INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_redirs(t_cmd_tbl *cmd_tbl, t_token *token);
@@ -183,15 +184,15 @@ char		**get_cmd_args_from_token(char *cmd, t_token *token);
 t_cmd_tbl	*init_cmd_table(t_cmd_tbl *cmd_tbls, t_token *tokens);
 // CMD TABLE UTILS
 bool		is_printable(char c);
-t_cmd_tbl	*get_empty_cmd_table(void);
+t_cmd_tbl	*new_cmd_table(void);
 int			token_list_size(t_token *token);
 t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new);
-// ADD TOKEN
-t_token		*add_flag_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_word_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_quote_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_redirection_token(char *str, int *i, int *old_i, t_token *tk);
-// ADD TOKEN UTILS
+	//ADD TOKEN
+t_token		*token_flag(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_word(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_quote(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_redir(char *str, int *i, int *old_i, t_token *tk);
+	//ADD TOKEN UTILS
 t_token		*copy_token(t_token *token);
 t_token		*get_new_token(char *str, t_type type);
 t_token		*add_new_token2(t_token *tokens, t_token *new);

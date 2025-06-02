@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 19:46:42 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:27:09 by zstenger         ###   ########.fr       */
+/*   Created: 2025/06/01 16:20:23 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/02 20:56:58 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ or NULL if the char isn't found in the string
 */
 char	*ft_pf_strchr(const char *s, int c)
 {
-	int	z;
+	int	i;
 
-	z = 0;
-	while (s[z])
+	i = 0;
+	while (s[i])
 	{
-		if (s[z] == (char)c)
-			return ((char *)(s + z));
-		z++;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
-	if (s[z] == (char)c)
-		return ((char *)(s + z));
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
 	return (NULL);
 }

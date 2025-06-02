@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fprintf.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 11:31:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:17:07 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int		p_err(const char *format, ...);
 
 //utils
-void	fpf_check_format(va_list args, char conversion_type, int *input_len);
+void	fpf_check_format(va_list *args, char conversion_type, int *input_len);
 void	fprint_hex(unsigned long number, char *hex_format, int *input_len);
 void	fpf_putchar(char c, int *input_len);
 void	fpf_putstr(char *str, int *input_len);

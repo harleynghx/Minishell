@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_table_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 15:09:42 by jergashe          #+#    #+#             */
-/*   Updated: 2023/03/25 14:06:27 by zstenger         ###   ########.fr       */
+/*   Created: 2025/06/02 22:06:53 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/02 22:06:54 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new)
 	return (cmd_tbl);
 }
 
-t_cmd_tbl	*get_empty_cmd_table(void)
+t_cmd_tbl	*new_cmd_table(void)
 {
 	t_cmd_tbl	*cmd_tbl;
 
