@@ -6,12 +6,30 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 12:43:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:18:47 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static void	execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end)
+{
+	t_token	*start;
+	char	*tmp;
+
+	start = tabl->redirs;
+	while (start != end && start != NULL)
+	{
+		if (start->type == HEREDOC)
+		{
+			tmp = stop_word(start->next->content, shll);
+			free(start->next->content);
+			start->next->content = tmp;
+			heredoc(tabl, start->next->content, shll);
+		}
+		start = start->next;
+	}
+}
 bool	has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table)
 {
 	t_token	*wrong;
@@ -32,23 +50,4 @@ bool	has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table)
 		return (false);
 	execute_only_heredocs(shell, table, wrong);
 	return (true);
-}
-
-void	execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end)
-{
-	t_token	*start;
-	char	*tmp;
-
-	start = tabl->redirs;
-	while (start != end && start != NULL)
-	{
-		if (start->type == HEREDOC)
-		{
-			tmp = stop_word(start->next->content, shll);
-			free(start->next->content);
-			start->next->content = tmp;
-			heredoc(tabl, start->next->content, shll);
-		}
-		start = start->next;
-	}
 }

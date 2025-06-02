@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/01 21:32:09 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:18:28 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,6 @@ int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE
 // EXEC ONLY HEREDOC
 bool		invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell);
-void		execute_only_heredocs(t_shell *shll, t_cmd_tbl *tabl, t_token *end);
 // EXEC PIPES
 bool		pipe_has_redirs(t_token *token);
 void		exec_pipes(t_cmd_tbl *table, t_shell *shell);
