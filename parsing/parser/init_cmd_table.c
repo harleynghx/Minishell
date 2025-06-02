@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 08:16:47 by jergashe          #+#    #+#             */
-/*   Updated: 2023/03/27 14:09:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:05:23 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cmd_tbl	*init_cmd_table(t_cmd_tbl *cmd_tbls, t_token *tokens)
 
 	if (tokens == NULL)
 		return (cmd_tbls);
-	new = get_empty_cmd_table();
+	new = new_cmd_table();
 	curr = tokens;
 	while (curr != NULL)
 	{

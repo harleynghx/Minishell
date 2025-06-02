@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 15:16:07 by jergashe          #+#    #+#             */
-/*   Updated: 2023/04/01 10:12:03 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/27 19:46:09 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/02 21:41:08 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 /* 
 split_elements_to_tokens takes one pipe (str) and token
 as input. Function takes token as argument to save space.
-Function uses i and old_i as indexes to create a new token
-from position old_i to i. And returns the head of token.
+Function uses i and start as indexes to create a new token
+from position start to i. And returns the head of token.
  */
-t_token	*split_elements_to_tokens(char *str, t_token *token)
+t_token	*tokenize(char *str, t_token *token)
 {
 	int	i;
-	int	old_i;
+	int	start;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		old_i = i;
-		token = add_quote_token(str, &i, &old_i, token);
-		token = add_word_token(str, &i, &old_i, token);
-		token = add_redirection_token(str, &i, &old_i, token);
-		token = add_flag_token(str, &i, &old_i, token);
+		start = i;
+		token = token_quote(str, &i, &start, token);
+		token = token_word(str, &i, &start, token);
+		token = token_redir(str, &i, &start, token);
+		token = token_flag(str, &i, &start, token);
 		i = skip_spaces(str, i);
 	}
 	return (token);
 }
 
-t_token	*add_quote_token(char *str, int *i, int *old_i, t_token *token)
+t_token	*token_quote(char *str, int *i, int *start, t_token *token)
 {
 	char	quote;
 	bool	stop;
@@ -53,30 +53,30 @@ t_token	*add_quote_token(char *str, int *i, int *old_i, t_token *token)
 			stop = true;
 		(*i)++;
 	}
-	if (*i - 1 != *old_i)
-		token = add_new_token(token, ft_strdup2(str, *old_i, *i), WORD);
-	*old_i = *i;
+	if (*i - 1 != *start)
+		token = add_new_token(token, ft_strdup2(str, *start, *i), WORD);
+	*start = *i;
 	return (token);
 }
 
-t_token	*add_word_token(char *str, int *i, int *old_i, t_token *token)
+t_token	*token_word(char *str, int *i, int *start, t_token *token)
 {
 	while ((ft_isalpha(str[*i]) || ft_isalnum(str[*i])
 			|| is_printable(str[*i]))
 		&& str[*i] != '\0')
 		(*i)++;
-	if (*i != *old_i)
+	if (*i != *start)
 	{
-		token = add_new_token(token, ft_strdup2(str, *old_i, *i), WORD);
-		*old_i = *i;
+		token = add_new_token(token, ft_strdup2(str, *start, *i), WORD);
+		*start = *i;
 	}
 	return (token);
 }
 
-t_token	*add_redirection_token(char *str, int *i, int *old_i, t_token *tk)
+t_token	*token_redir(char *str, int *i, int *start, t_token *tk)
 {
 	char	redirection;
-	t_type	red_type;
+	t_type	rdir_type;
 
 	if (str[*i] == '\0'
 		|| ft_pf_strchr(REDIRECTIONS, str[*i]) == NULL)
@@ -85,13 +85,13 @@ t_token	*add_redirection_token(char *str, int *i, int *old_i, t_token *tk)
 	while (str[*i] == redirection
 		&& str[*i] != '\0')
 		(*i)++;
-	red_type = get_redirection_type(str, *old_i, *i);
-	tk = add_new_token(tk, ft_strdup2(str, *old_i, *i), red_type);
-	*old_i = *i;
+	rdir_type = get_redirection_type(str, *start, *i);
+	tk = add_new_token(tk, ft_strdup2(str, *start, *i), rdir_type);
+	*start = *i;
 	return (tk);
 }
 
-t_token	*add_flag_token(char *str, int *i, int *old_i, t_token *token)
+t_token	*token_flag(char *str, int *i, int *start, t_token *token)
 {
 	if (str[*i] != '-')
 		return (token);
@@ -104,7 +104,7 @@ t_token	*add_flag_token(char *str, int *i, int *old_i, t_token *token)
 			break ;
 		(*i)++;
 	}
-	token = add_new_token(token, ft_strdup2(str, *old_i, *i), WORD);
-	*old_i = *i;
+	token = add_new_token(token, ft_strdup2(str, *start, *i), WORD);
+	*start = *i;
 	return (token);
 }

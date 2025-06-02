@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:18 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:37 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:54:24 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	signals_child(struct termios *mirror_termios)
 {
 	tcsetattr(1, TCSAFLUSH, mirror_termios);
-	signal_ctrl_backslash();
+	signal_backslash();
 	signal_ctrl_c_child();
 }
 

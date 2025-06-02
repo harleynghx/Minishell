@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fpf_check_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/05 11:40:01 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/17 13:56:20 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/31 16:55:16 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/05/31 18:16:30 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,25 @@ output as printf while printing pointers
 • %X Prints a number in hexadecimal (base 16) uppercase format.
 • %% Prints a percent sign.
 */
-void	fpf_check_format(va_list args, char conversion_type, int *input_len)
+void	fpf_check_format(va_list *args, char conversion_type, int *input_len)
 {
 	if (conversion_type == '%')
 		fpf_putchar('%', input_len);
 	else if (conversion_type == 'c')
-		fpf_putchar(va_arg(args, int), input_len);
+		fpf_putchar(va_arg(*args, int), input_len);
 	else if (conversion_type == 's')
-		fpf_putstr(va_arg(args, char *), input_len);
+		fpf_putstr(va_arg(*args, char *), input_len);
 	else if (conversion_type == 'p')
 	{
 		fpf_putstr("0x", input_len);
-		fprint_hex(va_arg(args, unsigned long), HEX_LC, input_len);
+		fprint_hex(va_arg(*args, unsigned long), HEX_LC, input_len);
 	}
 	else if (conversion_type == 'd' || conversion_type == 'i')
-		fpf_putnbr(va_arg(args, int), input_len);
+		fpf_putnbr(va_arg(*args, int), input_len);
 	else if (conversion_type == 'u')
-		fpf_putnbr(va_arg(args, unsigned int), input_len);
+		fpf_putnbr(va_arg(*args, unsigned int), input_len);
 	else if (conversion_type == 'x')
-		fprint_hex(va_arg(args, unsigned int), HEX_LC, input_len);
+		fprint_hex(va_arg(*args, unsigned int), HEX_LC, input_len);
 	else if (conversion_type == 'X')
-		fprint_hex(va_arg(args, unsigned int), HEX_UC, input_len);
+		fprint_hex(va_arg(*args, unsigned int), HEX_UC, input_len);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fprintf.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/05 11:53:13 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:57 by zstenger         ###   ########.fr       */
+/*   Created: 2025/05/31 18:24:37 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/05/31 18:24:40 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ and format specifications
 if there is format(input) checks the type of it
 if its a plain text, simply print it out
 else checks for the type of conversion and applies it and print the result
-
 */
+
 int	p_err(const char *format, ...)
 {
 	va_list	args;
@@ -39,7 +39,7 @@ int	p_err(const char *format, ...)
 			&& *fpf_strchr("cspdiuxX%", format[index + 1]))
 		{
 			index++;
-			fpf_check_format(args, format[index], input_len);
+			fpf_check_format(&args, format[index], input_len);
 		}
 		else
 			output += write(STDERR_FILENO, &format[index], 1);

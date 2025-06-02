@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:04 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 13:59:05 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:53:19 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@
 
 //STDERRORS
 # define FORK_ERROR "fork faild, no child has been created, we used protection"
-# define UNAME_REMOVED "Username not found. Please stop f*ckin around."
-# define UFILE_DELETED "Open failed: Username cannot be extracted."
-# define PIPE_ERROR "pipe failed, the pipeline is broken"
+# define PIPE_ERROR "pipe failed"
 # define MALLOC_FAIL "memory allocation failed"
 # define CMD_NOT_FND "command not found"
 # define INVALID_CMD "command not found"
