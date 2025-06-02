@@ -6,24 +6,13 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:22 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:00 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:35:24 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token)
-{
-	int	fd;
-
-	if (is_last_heredoc(token, table->redirs) == false)
-		return (-99);
-	dup2(shell->std_fds[0], STDIN_FILENO);
-	fd = open(table->heredoc_name, O_RDONLY);
-	return (fd);
-}
-
-bool	is_last_heredoc(t_token *token, t_token *redirs)
+static bool	is_last_heredoc(t_token *token, t_token *redirs)
 {
 	t_token	*heredoc;
 
@@ -35,6 +24,16 @@ bool	is_last_heredoc(t_token *token, t_token *redirs)
 		redirs = redirs->next;
 	}
 	if (heredoc == token)
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
+}
+int	open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token)
+{
+	int	fd;
+
+	if (is_last_heredoc(token, table->redirs) == FALSE)
+		return (-99);
+	dup2(shell->std_fds[0], STDIN_FILENO);
+	fd = open(table->heredoc_name, O_RDONLY);
+	return (fd);
 }

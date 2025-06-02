@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 13:18:28 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:48:30 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,6 @@ char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
 // OPEN HEREDOC
-bool		is_last_heredoc(t_token *token, t_token *redirs);
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE
 // EXEC ONLY HEREDOC
