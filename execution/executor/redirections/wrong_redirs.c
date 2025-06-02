@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:42 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:43:44 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 bool	has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table)
 {
 	t_token	*wrong;
-	t_token	*curr;
 
 	wrong = token;
 	while (wrong != NULL)
