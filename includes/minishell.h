@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/31 14:50:31 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:07:56 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ bool		has_wrong_pipe(char *str);
 bool		redir_before(char *str, int i);
 bool		wrong_operator_check(char *str);
 bool		is_emptyline(t_shell *shll);
-char		count_quotes(char *s, int sq, int dq);
+bool		count_quotes(char *s, int sq, int dq);
 int			nb_esc_chars(char *str, int last_ind);
 char		*ft_strdup2(char *str, int start, int end);
 
@@ -168,7 +168,7 @@ bool		table_check(t_cmd_tbl *tables);
 	//PIPE TOKENS
 int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
-char		**split_with_pipes(char *str, int start, int end, int index);
+char		**split_pipes(char *str, int start, int end, int index);
 	//COMMAND TABLE
 char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
@@ -177,7 +177,7 @@ void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
 void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
-t_token		*split_elements_to_tokens(char *str, t_token *token);
+t_token		*tokenize(char *str, t_token *token);
 	//INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
@@ -186,14 +186,14 @@ char		**get_cmd_args_from_token(char *cmd, t_token *token);
 t_cmd_tbl	*init_cmd_table(t_cmd_tbl *cmd_tbls, t_token *tokens);
 	// CMD TABLE UTILS
 bool		is_printable(char c);
-t_cmd_tbl	*get_empty_cmd_table(void);
+t_cmd_tbl	*new_cmd_table(void);
 int			token_list_size(t_token *token);
 t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new);
 	//ADD TOKEN
-t_token		*add_flag_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_word_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_quote_token(char *str, int *i, int *old_i, t_token *token);
-t_token		*add_redirection_token(char *str, int *i, int *old_i, t_token *tk);
+t_token		*token_flag(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_word(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_quote(char *str, int *i, int *old_i, t_token *token);
+t_token		*token_redir(char *str, int *i, int *old_i, t_token *tk);
 	//ADD TOKEN UTILS
 t_token		*copy_token(t_token *token);
 t_token		*get_new_token(char *str, t_type type);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:54:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/04/02 22:06:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/01 04:14:44 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strdup2(char *str, int start, int end)
 	return (result);
 }
 
-char	count_quotes(char *s, int sq, int dq)
+bool	count_quotes(char *s, int sq, int dq)
 {
 	int	sq_count;
 	int	dq_count;

@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:54:28 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/27 12:54:28 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:10:33 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	parser(t_shell *shell)
 	end = -1;
 	start = 0;
 	index = -1;
-	pipes = split_with_pipes(shell->trimmed_prompt, start, end, index);
+	pipes = split_pipes(shell->trimmed_prompt, start, end, index);
 	shell->cmd_tbls = create_cmd_table(pipes, shell);
 	free_char_array(pipes);
 	return (table_check(shell->cmd_tbls));
@@ -63,13 +63,13 @@ bool	table_check(t_cmd_tbl *tables)
 }
 
 /* 
-split_with_pipes gets trimmed prompt as input (str)
+split_pipes gets trimmed prompt as input (str)
 and returns 2d array of chars. Each array is a separate pipe
 this function is called once for each prompt call
 We pass start, end and index to function to save space
 start = 0, end = -1, index = -1; By default
  */
-char	**split_with_pipes(char *str, int start, int end, int index)
+char	**split_pipes(char *str, int start, int end, int index)
 {
 	char	**tokens;
 	char	*tmp;

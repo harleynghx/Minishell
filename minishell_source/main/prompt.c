@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:31:10 by zstenger          #+#    #+#             */
-/*   Updated: 2025/05/28 18:10:44 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:56:26 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	terminal_prompt(t_shell *shell)
 	if (shell->terminal_prompt != NULL)
 		free(shell->terminal_prompt);
 	directory = curr_dir(shell);
-	full = ft_nm_strjoin(directory, " > ");
+	full = ft_nm_strjoin(directory, " $ ");
 	shell->terminal_prompt = full;
 	shell->cmd_has_been_executed = TRUE;
 }
