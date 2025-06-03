@@ -6,48 +6,28 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/31 03:17:34 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:12:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	handle_redirections(t_shell *shell, t_cmd_tbl *table)
+static t_token	*set_curr(t_token *curr)
 {
-	t_token	*curr;
-	int		fd;
-
-	curr = table->redirs;
-	while (curr != NULL)
-	{
-		if (is_good_redirection(curr) == false)
-		{
-			shell->exit_code = 258;
-			return ;
-		}
-		if (curr->type == HEREDOC && curr->next->type == WORD)
-			fd = open_heredoc(table, shell, curr);
-		else if (curr->type == OUTPUT && curr->next->type == WORD)
-			fd = open_file(OUTPUT, curr->next->content, shell);
-		else if (curr->type == APPEND && curr->next->type == WORD)
-			fd = open_file(APPEND, curr->next->content, shell);
-		else if (curr->type == INPUT && curr->next->type == WORD)
-			fd = open_file(INPUT, curr->next->content, shell);
-		if (fd != -99 && change_stdin_out(curr->type, fd, shell, 0) == FALSE)
-			exit(1);
-		curr = set_curr(curr);
-	}
+	if (curr->next != NULL)
+		curr = curr->next->next;
+	else
+		curr = curr->next;
+	return (curr);
 }
-
-bool	is_good_redirection(t_token *token)
+static bool	std_out_error(t_shell *shell)
 {
-	if (is_redirection(token) && token->next != NULL
-		&& !is_redirection(token->next))
-		return (true);
-	return (false);
+	shell->exit_code = errno;
+	if (shell->print == TRUE)
+		p_err("%s%s\n", SHELL, strerror(errno));
+	return (TRUE);
 }
-
-bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
+static bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
 {
 	if (type == HEREDOC)
 	{
@@ -73,19 +53,39 @@ bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
 	return (TRUE);
 }
 
-bool	std_out_error(t_shell *shell)
+
+void	handle_redirections(t_shell *shell, t_cmd_tbl *table)
 {
-	shell->exit_code = errno;
-	if (shell->print == TRUE)
-		p_err("%s%s\n", SHELL, strerror(errno));
-	return (TRUE);
+	t_token	*curr;
+	int		fd;
+
+	curr = table->redirs;
+	while (curr != NULL)
+	{
+		if (is_good_redirection(curr) == FALSE)
+		{
+			shell->exit_code = 258;
+			return ;
+		}
+		if (curr->type == HEREDOC && curr->next->type == WORD)
+			fd = open_heredoc(table, shell, curr);
+		else if (curr->type == OUTPUT && curr->next->type == WORD)
+			fd = open_file(OUTPUT, curr->next->content, shell);
+		else if (curr->type == APPEND && curr->next->type == WORD)
+			fd = open_file(APPEND, curr->next->content, shell);
+		else if (curr->type == INPUT && curr->next->type == WORD)
+			fd = open_file(INPUT, curr->next->content, shell);
+		if (fd != -99 && change_stdin_out(curr->type, fd, shell, 0) == FALSE)
+			exit(1);
+		curr = set_curr(curr);
+	}
 }
 
-t_token	*set_curr(t_token *curr)
+bool	is_good_redirection(t_token *token)
 {
-	if (curr->next != NULL)
-		curr = curr->next->next;
-	else
-		curr = curr->next;
-	return (curr);
+	if (is_redirection(token) && token->next != NULL
+		&& !is_redirection(token->next))
+		return (TRUE);
+	return (FALSE);
 }
+

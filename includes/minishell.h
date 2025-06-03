@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:48:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:10:59 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,13 +238,10 @@ int			slash_at_path_start(t_shell *shell, char *path);
 int			no_such_file_or_folder(char *command, t_shell *shell);
 int			dot_dot_slash_at_path_start(t_shell *shell, char *path);
 // HANDLE REDIRECTIONS
-t_token		*set_curr(t_token *curr);
-bool		std_out_error(t_shell *shell);
 bool		is_good_redirection(t_token *token);
 void		handle_redirections(t_shell *shell, t_cmd_tbl *table);
 int			open_file(t_type type, char *file_name, t_shell *shell);
 bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
-bool		change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val);
 // HEREDOC EXEC
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);

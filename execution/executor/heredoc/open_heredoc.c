@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:22 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:35:24 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 02:33:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static bool	is_last_heredoc(t_token *token, t_token *redirs)
 {
-	t_token	*heredoc;
+	t_token	*last_heredoc;
 
-	heredoc = NULL;
+	last_heredoc = NULL;
 	while (redirs != NULL)
 	{
 		if (redirs->type == HEREDOC)
-			heredoc = redirs;
+			last_heredoc = redirs;
 		redirs = redirs->next;
 	}
-	if (heredoc == token)
+	if (last_heredoc == token)
 		return (TRUE);
 	return (FALSE);
 }
