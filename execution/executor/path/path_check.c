@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:40 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 17:37:53 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:30:56 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,16 @@ static int	no_such_file_or_folder(char *command, t_shell *shell)
 	return (FALSE);
 }
 
-static int	dot_dot_slash_at_path_start(t_shell *shell, char *path)
+static int	check_executable_path(t_shell *shell, char *path)
 {
 	if (access(path, X_OK) == 0)
-		return (TRUE);
-	else
-		return (no_such_file_or_folder(path, shell), FALSE);
-}
-
-static int	dot_at_path_start(t_shell *shell, char *path)
-{
-	if (path[0] == '.' && access(path, X_OK) == 0)
 		return (TRUE);
 	return (no_such_file_or_folder(path, shell), FALSE);
-}
-
-static int	slash_at_path_start(t_shell *shell, char *path)
-{
-	if (access(path, X_OK) == 0)
-		return (TRUE);
-	else
-		return (no_such_file_or_folder(path, shell), FALSE);
 }
 int	path_check(char *path, t_shell *shell)
 {
 	if (path[0] == '.' && path[1] == '.' && path[2] == '/'
-		&& dot_dot_slash_at_path_start(shell, path) == TRUE)
+		&& check_executable_path(shell, path) == TRUE)
 		return (TRUE);
 	if (path[0] == '.' && path[1] == '/' && ft_strlen(path) == 2)
 		return (no_such_file_or_folder(shell->trimmed_prompt, shell), FALSE);
@@ -63,9 +47,9 @@ int	path_check(char *path, t_shell *shell)
 	{
 		if (path[0] == '.' && path[1] != '/')
 			return (invalid_command(shell, path), FALSE);
-		else if (path[0] == '.' && dot_at_path_start(shell, path) == TRUE)
+		else if (path[0] == '.' && check_executable_path(shell, path) == TRUE)
 			return (TRUE);
-		else if (path[0] == '/' && slash_at_path_start(shell, path) == TRUE)
+		else if (path[0] == '/' && check_executable_path(shell, path) == TRUE)
 			return (TRUE);
 		else if (access(path, X_OK) == 0)
 			return (TRUE);
