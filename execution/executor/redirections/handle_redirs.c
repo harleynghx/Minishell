@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 16:12:23 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:13:45 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
 			return (free_at_child(shell), FALSE);
 	return (TRUE);
 }
-
 
 void	handle_redirections(t_shell *shell, t_cmd_tbl *table)
 {

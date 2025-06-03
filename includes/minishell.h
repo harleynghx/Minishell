@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 16:10:59 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:37:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,12 +231,7 @@ void		final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell);
 char		*extract_path(t_shell *shell, char *command);
 void		invalid_command(t_shell *shell, char *command);
 // PATH CHECK
-bool		is_a_directory(t_shell *shell, char *cmd);
 int			path_check(char *cmd_path, t_shell *shell);
-int			dot_at_path_start(t_shell *shell, char *path);
-int			slash_at_path_start(t_shell *shell, char *path);
-int			no_such_file_or_folder(char *command, t_shell *shell);
-int			dot_dot_slash_at_path_start(t_shell *shell, char *path);
 // HANDLE REDIRECTIONS
 bool		is_good_redirection(t_token *token);
 void		handle_redirections(t_shell *shell, t_cmd_tbl *table);

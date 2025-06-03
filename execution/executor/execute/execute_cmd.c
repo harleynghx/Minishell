@@ -6,12 +6,28 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:19 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:37:35 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static bool	is_a_directory(t_shell *shell, char *cmd)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(cmd);
+	if (cmd[0] == '/' && cmd[len - 1] == '/')
+	{
+		if (shell->print == TRUE)
+			p_err("%s%s: %s\n", SHELL, cmd, ISDIR);
+		shell->exit_code = 126;
+		return (TRUE);
+	}
+	return (FALSE);
+}
 void	execute_command(t_cmd_tbl *table, t_shell *shell)
 {
 	char	*cmd_path;
@@ -65,22 +81,6 @@ void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 }
 
 // check if the cmd is a directory
-bool	is_a_directory(t_shell *shell, char *cmd)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(cmd);
-	if (cmd[0] == '/' && cmd[len - 1] == '/')
-	{
-		if (shell->print == TRUE)
-			p_err("%s%s: %s\n", SHELL, cmd, ISDIR);
-		shell->exit_code = 126;
-		return (TRUE);
-	}
-	return (FALSE);
-}
 
 void	child_exit(t_shell *shell)
 {
