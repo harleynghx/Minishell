@@ -6,13 +6,13 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:43:22 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/27 18:43:23 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:46:56 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	cmd_to_lover_case(t_cmd_tbl *table)
+void	cmd_to_lower_case(t_cmd_tbl *table)
 {
 	char	*result;
 

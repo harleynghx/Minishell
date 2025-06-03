@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:44:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/31 18:37:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:47:08 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rm_quotes_tables(t_cmd_tbl *tables, t_shell *shell)
 			tmp = rm_quotes(tables->cmd);
 			free(tables->cmd);
 			tables->cmd = tmp;
-			cmd_to_lover_case(tables);
+			cmd_to_lower_case(tables);
 		}
 		if (strcmp_2(tables->cmd, "echo") == FALSE
 			&& strcmp_2(tables->cmd, "export") == FALSE)

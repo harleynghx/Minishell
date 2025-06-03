@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:48:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:47:03 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ char		**split_pipes(char *str, int start, int end, int index);
 	//COMMAND TABLE
 char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
-void		cmd_to_lover_case(t_cmd_tbl *table);
+void		cmd_to_lower_case(t_cmd_tbl *table);
 void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
 void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
