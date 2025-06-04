@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 13:15:00 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:28:54 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 		child_exit(shell);
 	exit_code = shell->exit_code;
 	shell->cmd_has_been_executed = 1;
-	cmd_args = copy_2d_char_array(table->cmd_args);
-	env = copy_2d_char_array(shell->env);
+	cmd_args = duplicate_string_array(table->cmd_args);
+	env = duplicate_string_array(shell->env);
 	if (execve(cmd_path, cmd_args, env) == -1)
 	{
 		if (shell->print == TRUE)

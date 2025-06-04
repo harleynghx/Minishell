@@ -6,13 +6,13 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:48 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:17 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:28:43 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	**copy_2d_char_array(char **array)
+char	**duplicate_string_array(char **array)
 {
 	int		i;
 	char	**result;

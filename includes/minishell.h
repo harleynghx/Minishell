@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 13:15:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:29:13 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,7 @@ void		pipe_exec_in_child(t_cmd_tbl *t, t_shell *s, int fd_in, int fd_out);
 // EXEC UTILS
 void		child_exit(t_shell *shell);
 void		close_and_dup(t_shell *shell);
-char		**copy_2d_char_array(char **array);
+char		**duplicate_string_array(char **array);
 void		clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table);
 void		waitpid_to_get_exit_status(pid_t pid, t_shell *shell, int *status);
 
