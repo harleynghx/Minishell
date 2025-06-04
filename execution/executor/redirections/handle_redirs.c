@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 16:13:45 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:40:25 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
 	}
 	if (ret_val == -1)
 		if (std_out_error(shell) == TRUE)
-			return (free_at_child(shell), FALSE);
+			return (free_at_exit(shell), FALSE);
 	return (TRUE);
 }
 

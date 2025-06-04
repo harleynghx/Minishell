@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 13:28:54 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:40:08 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	exit_after_builtin(t_shell *shell)
 	int	exit_code;
 
 	exit_code = shell->exit_code;
-	free_at_child(shell);
+	free_at_exit(shell);
 	exit(exit_code);
 }
 static bool	is_a_directory(t_shell *shell, char *cmd)
@@ -36,7 +36,7 @@ static bool	is_a_directory(t_shell *shell, char *cmd)
 	}
 	return (FALSE);
 }
-static void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
+static void	exec_command_with_env(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 {
 	char	**cmd_args;
 	char	**env;
@@ -67,14 +67,14 @@ void	execute_command(t_cmd_tbl *table, t_shell *shell)
 	if (builtins(shell, table->cmd, table->cmd_args) == TRUE)
 		exit_after_builtin(shell);
 	else if (path_check(table->cmd, shell) == TRUE)
-		final_exec(table->cmd, table, shell);
+		exec_command_with_env(table->cmd, table, shell);
 	else if (table->cmd[0] != '.' && table->cmd[0] != '/')
 	{
 		cmd_path = extract_path(shell, table->cmd);
 		if (cmd_path == NULL)
 			clear_and_exit(shell, cmd_path, table);
 		else if (access(cmd_path, X_OK) == 0)
-			final_exec(cmd_path, table, shell);
+			exec_command_with_env(cmd_path, table, shell);
 	}
 }
 
@@ -83,6 +83,6 @@ void	child_exit(t_shell *shell)
 	int	code;
 
 	code = shell->exit_code;
-	free_at_child(shell);
+	free_at_exit(shell);
 	exit(code);
 }

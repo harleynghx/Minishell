@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:36 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/27 18:51:14 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:41:39 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,3 @@ void	free_at_exit(t_shell *shell)
 	rl_clear_history();
 }
 
-void	free_at_child(t_shell *shell)
-{
-	t_token	*token;
-
-	if (shell->trimmed_prompt != NULL)
-		free_cmd_tbls(shell->cmd_tbls);
-	free_char_array(shell->cmd_paths);
-	free(shell->terminal_prompt);
-	free_char_array(shell->env);
-	free(shell->trimmed_prompt);
-	free_env(shell->env_head);
-	free(shell->prev_prompt);
-	free(shell->heredoc);
-	free(shell->prompt);
-	rl_clear_history();
-}

@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 13:29:13 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:41:32 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,15 +271,11 @@ bool		syntax_error_newline(void);
 // CLEANUP TOOLS
 void		free_env(t_env *head);
 void		free_at_exit(t_shell *shell);
-void		free_at_child(t_shell *shell);
 void		free_char_array(char **array);
 void		free_cmd_tbls(t_cmd_tbl *cmd_tbls);
 
 // what does the philosopher pigeon say?
 // TO BE OR NOT TO BE
-void		print_tokens(t_token *lexer);
-void		print_cmd_tbl(t_cmd_tbl *cmd_tbl);
-void		ft_print_2d_char_array(char **array_2d);
 
 int			g_ctrl_c;
 

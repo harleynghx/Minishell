@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:48 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 13:28:43 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:40:16 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table)
 			"-e") == TRUE && table->next == NULL)
 	{
 		free(cmd_path);
-		free_at_child(shell);
+		free_at_exit(shell);
 		exit(127);
 	}
 	else if (cmd_path == NULL && ft_strlen(table->cmd) == 0)
@@ -49,13 +49,13 @@ void	clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table)
 		if (shell->print == TRUE)
 			p_err("%s%s: %s\n", SHELL, table->cmd, CMD_NOT_FND);
 		free(cmd_path);
-		free_at_child(shell);
+		free_at_exit(shell);
 		exit(126);
 	}
 	if (shell->print == TRUE)
 		p_err("%s%s: %s\n", SHELL, table->cmd, CMD_NOT_FND);
 	free(cmd_path);
-	free_at_child(shell);
+	free_at_exit(shell);
 	exit(127);
 }
 
