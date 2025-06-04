@@ -6,12 +6,20 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 17:37:35 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:15:00 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static void	exit_after_builtin(t_shell *shell)
+{
+	int	exit_code;
+
+	exit_code = shell->exit_code;
+	free_at_child(shell);
+	exit(exit_code);
+}
 static bool	is_a_directory(t_shell *shell, char *cmd)
 {
 	int	i;
@@ -28,36 +36,7 @@ static bool	is_a_directory(t_shell *shell, char *cmd)
 	}
 	return (FALSE);
 }
-void	execute_command(t_cmd_tbl *table, t_shell *shell)
-{
-	char	*cmd_path;
-
-	if (table->cmd == NULL)
-		child_exit(shell);
-	if (builtins(shell, table->cmd, table->cmd_args) == TRUE)
-		exit_after_builtin(shell);
-	else if (path_check(table->cmd, shell) == TRUE)
-		final_exec(table->cmd, table, shell);
-	else if (table->cmd[0] != '.' && table->cmd[0] != '/')
-	{
-		cmd_path = extract_path(shell, table->cmd);
-		if (cmd_path == NULL)
-			clear_and_exit(shell, cmd_path, table);
-		else if (access(cmd_path, X_OK) == 0)
-			final_exec(cmd_path, table, shell);
-	}
-}
-
-void	exit_after_builtin(t_shell *shell)
-{
-	int	exit_code;
-
-	exit_code = shell->exit_code;
-	free_at_child(shell);
-	exit(exit_code);
-}
-
-void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
+static void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 {
 	char	**cmd_args;
 	char	**env;
@@ -79,8 +58,25 @@ void	final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
 		exit(exit_code);
 	}
 }
+void	execute_command(t_cmd_tbl *table, t_shell *shell)
+{
+	char	*cmd_path;
 
-// check if the cmd is a directory
+	if (table->cmd == NULL)
+		child_exit(shell);
+	if (builtins(shell, table->cmd, table->cmd_args) == TRUE)
+		exit_after_builtin(shell);
+	else if (path_check(table->cmd, shell) == TRUE)
+		final_exec(table->cmd, table, shell);
+	else if (table->cmd[0] != '.' && table->cmd[0] != '/')
+	{
+		cmd_path = extract_path(shell, table->cmd);
+		if (cmd_path == NULL)
+			clear_and_exit(shell, cmd_path, table);
+		else if (access(cmd_path, X_OK) == 0)
+			final_exec(cmd_path, table, shell);
+	}
+}
 
 void	child_exit(t_shell *shell)
 {
