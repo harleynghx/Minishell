@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:20:09 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 13:23:47 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:08:08 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 	if (table->cmd != NULL)
 		builtins(shell, table->cmd, table->cmd_args);
 	if (has_wrong_redir(shell, table->redirs, table) == FALSE)
-		close_and_dup(shell);
+		reset_io_streams(shell);
 	else
 		shell->exit_code = 258;
 }

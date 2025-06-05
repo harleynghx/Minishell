@@ -6,33 +6,33 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:57 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/05 16:17:05 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:08:12 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static void	pipe_exec_in_child(t_cmd_tbl *t, t_shell *s, int fd_in, int fd_out)
-{
-	signals_child(&s->mirror_termios);
-	s->print = TRUE;
-	close(fd_in);
-	dup2(fd_out, STDOUT_FILENO);
-	close(fd_out);
-	handle_redirections(s, t);
-	execute_command(t, s);
-}
 static bool	pipe_has_redirs(t_token *token)
 {
 	while (token != NULL)
 	{
 		if (token->type == APPEND || token->type == OUTPUT)
-			return (true);
+		return (true);
 		token = token->next;
 	}
-	return (false);
+	return (FALSE);
 }
-static void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
+static void	exec_child_pipe_cmd(t_cmd_tbl *table, t_shell *shell, int fd_read, int fd_write)
+{
+	signals_child(&shell->mirror_termios);
+	shell->print = TRUE;
+	close(fd_read);
+	dup2(fd_write, STDOUT_FILENO);
+	close(fd_write);
+	handle_redirections(shell, table);
+	execute_command(table, shell);
+}
+static void	prepare_pipe_and_fork(t_cmd_tbl *table, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -51,7 +51,7 @@ static void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
 			p_err("%s%s\n", SHELL, FORK_ERROR);
 	}
 	else if (pid == 0)
-		pipe_exec_in_child(table, shell, fd[0], fd[1]);
+		exec_child_pipe_cmd(table, shell, fd[0], fd[1]);
 	shell->print = FALSE;
 	if (table->cmd != NULL)
 		builtins(shell, table->cmd, table->cmd_args);
@@ -60,7 +60,7 @@ static void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
 	close(fd[0]);
 }
 
-static void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
+static void	exec_last_pipe_cmd(t_cmd_tbl *table, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -77,7 +77,7 @@ static void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
 	{
 		signals_child(&shell->mirror_termios);
 		shell->print = TRUE;
-		if (pipe_has_redirs(table->redirs) == false)
+		if (pipe_has_redirs(table->redirs) == FALSE)
 			dup2(shell->std_fds[1], STDOUT_FILENO);
 		handle_redirections(shell, table);
 		execute_command(table, shell);
@@ -85,8 +85,8 @@ static void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
 	waitpid_to_get_exit_status(pid, shell, &status);
 	if (table->cmd != NULL)
 		builtins(shell, table->cmd, table->cmd_args);
-	if (has_wrong_redir(shell, table->redirs, table) == false)
-		close_and_dup(shell);
+	if (has_wrong_redir(shell, table->redirs, table) == FALSE)
+		reset_io_streams(shell);
 }
 
 void	exec_pipes(t_cmd_tbl *table, t_shell *shell)
@@ -96,10 +96,10 @@ void	exec_pipes(t_cmd_tbl *table, t_shell *shell)
 
 	while (table->next != NULL)
 	{
-		pipe_child_process(table, shell);
+		prepare_pipe_and_fork(table, shell);
 		table = table->next;
 	}
-	exec_last_pipe(table, shell);
+	exec_last_pipe_cmd(table, shell);
 	pid = waitpid(0, &status, 0);
 	while (pid != -1)
 		pid = waitpid(0, &status, 0);

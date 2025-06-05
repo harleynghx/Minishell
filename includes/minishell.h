@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/05 16:15:36 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:08:18 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ bool		invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell);
 void		exec_pipes(t_cmd_tbl *table, t_shell *shell);
 // EXEC UTILS
 void		child_exit(t_shell *shell);
-void		close_and_dup(t_shell *shell);
+void		reset_io_streams(t_shell *shell);
 char		**duplicate_string_array(char **array);
 void		clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table);
 void		waitpid_to_get_exit_status(pid_t pid, t_shell *shell, int *status);

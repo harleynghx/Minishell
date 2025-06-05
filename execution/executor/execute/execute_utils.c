@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:48 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 16:40:16 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:08:28 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	waitpid_to_get_exit_status(pid_t pid, t_shell *shell, int *status)
 	shell->exit_code = WEXITSTATUS(*status);
 }
 
-void	close_and_dup(t_shell *shell)
+void	reset_io_streams(t_shell *shell)
 {
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
