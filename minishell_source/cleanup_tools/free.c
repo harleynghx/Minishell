@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:36 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 16:41:39 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:45:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	free_cmd_tbls(t_cmd_tbl *cmd_tbls)
 {
 	t_cmd_tbl	*tmp;
 
-	tmp = NULL;
-	if (cmd_tbls == NULL)
-		return ;
 	while (cmd_tbls != NULL)
 	{
 		free_tokens(cmd_tbls->args);
@@ -63,8 +60,6 @@ void	free_cmd_tbls(t_cmd_tbl *cmd_tbls)
 
 void	free_at_exit(t_shell *shell)
 {
-	t_token	*token;
-
 	if (shell->trimmed_prompt != NULL)
 		free_cmd_tbls(shell->cmd_tbls);
 	free_char_array(shell->cmd_paths);
@@ -77,4 +72,3 @@ void	free_at_exit(t_shell *shell)
 	free(shell->prompt);
 	rl_clear_history();
 }
-

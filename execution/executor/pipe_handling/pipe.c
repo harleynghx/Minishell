@@ -6,29 +6,33 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:57 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:48 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:17:05 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	exec_pipes(t_cmd_tbl *table, t_shell *shell)
+static void	pipe_exec_in_child(t_cmd_tbl *t, t_shell *s, int fd_in, int fd_out)
 {
-	int	status;
-	int	pid;
-
-	while (table->next != NULL)
-	{
-		pipe_child_process(table, shell);
-		table = table->next;
-	}
-	exec_last_pipe(table, shell);
-	pid = waitpid(0, &status, 0);
-	while (pid != -1)
-		pid = waitpid(0, &status, 0);
+	signals_child(&s->mirror_termios);
+	s->print = TRUE;
+	close(fd_in);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	handle_redirections(s, t);
+	execute_command(t, s);
 }
-
-void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
+static bool	pipe_has_redirs(t_token *token)
+{
+	while (token != NULL)
+	{
+		if (token->type == APPEND || token->type == OUTPUT)
+			return (true);
+		token = token->next;
+	}
+	return (false);
+}
+static void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -56,18 +60,7 @@ void	pipe_child_process(t_cmd_tbl *table, t_shell *shell)
 	close(fd[0]);
 }
 
-void	pipe_exec_in_child(t_cmd_tbl *t, t_shell *s, int fd_in, int fd_out)
-{
-	signals_child(&s->mirror_termios);
-	s->print = TRUE;
-	close(fd_in);
-	dup2(fd_out, STDOUT_FILENO);
-	close(fd_out);
-	handle_redirections(s, t);
-	execute_command(t, s);
-}
-
-void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
+static void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -96,13 +89,19 @@ void	exec_last_pipe(t_cmd_tbl *table, t_shell *shell)
 		close_and_dup(shell);
 }
 
-bool	pipe_has_redirs(t_token *token)
+void	exec_pipes(t_cmd_tbl *table, t_shell *shell)
 {
-	while (token != NULL)
+	int	status;
+	int	pid;
+
+	while (table->next != NULL)
 	{
-		if (token->type == APPEND || token->type == OUTPUT)
-			return (true);
-		token = token->next;
+		pipe_child_process(table, shell);
+		table = table->next;
 	}
-	return (false);
+	exec_last_pipe(table, shell);
+	pid = waitpid(0, &status, 0);
+	while (pid != -1)
+		pid = waitpid(0, &status, 0);
 }
+
