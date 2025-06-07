@@ -6,19 +6,18 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/07 23:25:53 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:55:53 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	cd(t_shell *shell, char *cmd, char **args)
+void	cd(t_shell *shell, char **args)
 {
 	t_env	*pwd_var;
 	char	*old_pwd_copy;
 	char	*target;
 
-	(void)cmd;
 	pwd_var = find_env_var(shell->env_head, "PWD");
 	if (!pwd_var || !pwd_var->content)
 		return ;

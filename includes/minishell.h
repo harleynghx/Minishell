@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/05 19:08:18 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:53:16 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ bool		strcmp_2(char *str1, char *str2);
 void		add_oldpwd_to_env(t_shell *shell);
 int			nb_delimited_words(char *s, char c);
 void		cd_slash_is_first_cmd(t_shell *shell);
-void		cd(t_shell *shell, char *cmd, char **args);
+void		cd(t_shell *shell, char **args);
 void		cd_tilde(t_shell *shell, char *folder_path);
 void		cd_forward(t_shell *shell, char *folder_path);
 void		update_pwd_and_oldpwd(t_shell *shell, char *old_pwd);
