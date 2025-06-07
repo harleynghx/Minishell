@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:21:10 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:51:45 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	cd_tilde(t_shell *shell, char *folder_path)
 	char	*path;
 	char	*tilde_trimmed;
 
+	printf("tilde\n");
 	if (shell->envless == FALSE)
 	{
 		home = find_env_var(shell->env_head, "HOME");
@@ -45,6 +46,7 @@ void	cd_home(t_shell *shell)
 {
 	t_env	*hdr;
 
+	printf("home\n");
 	hdr = find_env_var(shell->env_head, "HOME");
 	if (!hdr)
 	{
@@ -64,13 +66,13 @@ void	cd_oldpwd(t_shell *shell)
 	t_env	*old_pwd;
 	t_env	*curr_pwd;
 
+	printf("oldpwd\n");
 	if (shell->prev_prompt == NULL || shell->envless == TRUE)
 	{
 		cd_slash_is_first_cmd(shell);
 		return ;
 	}
-	old_pwd = find_env_var(shell->env_head, "OLDPWD");
-	if (!old_pwd)
+	old_pwd = find_env_var(shell->env_head, "OLDPWD");	if (!old_pwd)
 	{
 		shell->exit_code = 1;
 		p_err("%scd: %s: %s\n", SHELL, "OLDPWD", strerror(errno));
@@ -88,6 +90,8 @@ void	cd_oldpwd(t_shell *shell)
 
 void	cd_forward(t_shell *shell, char *folder_path)
 {
+
+	printf("forward\n");
 	if (chdir(folder_path) == -1)
 	{
 		shell->exit_code = 1;
@@ -98,6 +102,7 @@ void	cd_forward(t_shell *shell, char *folder_path)
 
 void	cd_back(t_shell *shell, char *dotdot, char *folder_path)
 {
+	printf("back\n");
 	if (ft_strcmp(dotdot, "..") == 1 && folder_path == NULL)
 	{
 		if (chdir(dotdot) == -1)

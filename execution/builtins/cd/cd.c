@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/07 23:55:53 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:57:46 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cd(t_shell *shell, char **args)
 		cd_home(shell);
 	else if (target[0] == '~')
 		cd_tilde(shell, target);
-	else if (ft_strcmp(target, "-") == 0)
+	else if (ft_strcmp(target, "-") == TRUE)
 		cd_oldpwd(shell);
 	else if (ft_strcmp(target, "..") == 0 || ft_strncmp(target, "../", 3) == 0)
 		cd_back(shell, target, args[2]);
