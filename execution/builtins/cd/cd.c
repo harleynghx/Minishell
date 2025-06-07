@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:21:03 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:25:53 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	cd(t_shell *shell, char *cmd, char **args)
 {
-	t_env	*old_pwd;
-	char	*old_pwd_content;
+	t_env	*pwd_var;
+	char	*old_pwd_copy;
+	char	*target;
 
-	old_pwd = find_env_var(shell->env_head, "PWD");
-	old_pwd_content = old_pwd->content;
-	if (args[1] == NULL)
+	(void)cmd;
+	pwd_var = find_env_var(shell->env_head, "PWD");
+	if (!pwd_var || !pwd_var->content)
+		return ;
+	old_pwd_copy = ft_strdup(pwd_var->content);
+	if (!old_pwd_copy)
+		return ;
+	target = args[1];
+	if (!target)
 		cd_home(shell);
-	else if (args[1][0] == '~')
-		cd_tilde(shell, args[1]);
-	else if (strcmp_2(args[1], "-") == TRUE)
+	else if (target[0] == '~')
+		cd_tilde(shell, target);
+	else if (ft_strcmp(target, "-") == 0)
 		cd_oldpwd(shell);
-	else if (args[1] != NULL && ft_strcmp(args[1], "..") != 1
-		&& args[1][0] != '-')
-		cd_forward(shell, args[1]);
-	else if (ft_strcmp(args[1], "..") == TRUE || ft_strncmp(args[1], "../",
-			3) == 0)
-		cd_back(shell, args[1], args[2]);
-	update_pwd_and_oldpwd(shell, old_pwd->content);
+	else if (ft_strcmp(target, "..") == 0 || ft_strncmp(target, "../", 3) == 0)
+		cd_back(shell, target, args[2]);
+	else
+		cd_forward(shell, target);
+	update_pwd_and_oldpwd(shell, old_pwd_copy);
+	free(old_pwd_copy);
 }
