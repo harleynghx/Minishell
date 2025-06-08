@@ -1,45 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra_utils.c                                      :+:      :+:    :+:   */
+/*   dont_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/19 02:47:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/31 21:01:14 by zstenger         ###   ########.fr       */
+/*   Created: 2025/06/03 17:36:59 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/03 19:56:54 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	dont_expand(char *str, int i)
-{
-	int		j;
-	int		sq;
-	int		dq;
-	bool	go_back;
-
-	sq = 0;
-	dq = 0;
-	go_back = false;
-	if (i == 0)
-		return (FALSE);
-	j = i;
-	if (i > 0 && (str[i + 1] == DQUOTE || str[i + 1] == SQUOTE))
-		return (TRUE);
-	while (j != 0)
-	{
-		if (str[j] == SQUOTE || str[j] == DQUOTE)
-			go_back = false;
-		j--;
-	}
-	if (go_back == false)
-		if (dont_expand_result(str, i, dq, sq) == TRUE)
-			return (TRUE);
-	return (FALSE);
-}
-
-bool	dont_expand_result(char *str, int i, int dq, int sq)
+static bool	dont_expand_result(char *str, int i, int dq, int sq)
 {
 	int	j;
 
@@ -66,3 +39,13 @@ bool	dont_expand_result(char *str, int i, int dq, int sq)
 		return (TRUE);
 	return (FALSE);
 }
+
+bool	dont_expand(char *str, int i)
+{
+	if (i == 0)
+		return (FALSE);
+	if (i > 0 && (str[i + 1] == DQUOTE || str[i + 1] == SQUOTE))
+		return (TRUE);
+	return (dont_expand_result(str, i, 0, 0));
+}
+

@@ -54,7 +54,7 @@ PARSER			= parser/parser \
 				  parser/remove_quotes \
 
 EXPANDER		= expander/expander \
-				  expander/extra_utils \
+				  expander/dont_expand \
 				  expander/expand_tokens \
 				  expander/expander_utils \
 

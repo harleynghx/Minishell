@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 19:54:11 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 22:09:41 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,20 @@ void	execute(t_shell *shell, t_cmd_tbl *table)
 		return ;
 	}
 	handle_heredocs(table, shell);
-	if (g_ctrl_c == FALSE && table != NULL && table->next == NULL
+	if (g_ctrl_c == TRUE && shell->heredoc_ctrl == TRUE)
+	{
+		unlink(table->heredoc_name);
+		free(table->heredoc_name);
+		table->heredoc_name = NULL;
+		g_ctrl_c = FALSE;
+		shell->heredoc_ctrl = FALSE;
+
+		free_cmd_tbls(shell->cmd_tbls);
+		shell->cmd_tbls = NULL;
+		write(1, "\n", 1);
+		return;
+	}
+	else if (g_ctrl_c == FALSE && table != NULL && table->next == NULL
 		&& table_size(table) == 1)
 		exec_without_pipes(table, shell);
 	else if (g_ctrl_c == FALSE && table != NULL && table->next != NULL)

@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:03:53 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/28 17:59:51 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:05:29 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	*read_line(t_shell *shell)
 		free(line);
 	}
 	shell->trimmed_prompt = ft_strtrim(shell->prompt, SPACES);
+	g_ctrl_c = FALSE;
 	if (shell->prompt == NULL)
 		return (NULL);
 	return ((void *)1);

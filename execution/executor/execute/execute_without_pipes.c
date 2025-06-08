@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_without_pipes.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:20:09 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 13:23:47 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:14:23 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 	else if (pid == 0)
 		simple_exec_in_child(shell, table);
 	waitpid_to_get_exit_status(pid, shell, &status);
+	printf("^\n");
 	if (table->cmd != NULL)
 		builtins(shell, table->cmd, table->cmd_args);
 	if (has_wrong_redir(shell, table->redirs, table) == FALSE)

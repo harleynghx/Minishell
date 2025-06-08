@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/31 03:17:34 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:47:55 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	handle_redirections(t_shell *shell, t_cmd_tbl *table)
 		else if (curr->type == INPUT && curr->next->type == WORD)
 			fd = open_file(INPUT, curr->next->content, shell);
 		if (fd != -99 && change_stdin_out(curr->type, fd, shell, 0) == FALSE)
+		{
+			printf("exit\n");
 			exit(1);
+		}
 		curr = set_curr(curr);
 	}
 }

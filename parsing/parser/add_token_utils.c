@@ -6,15 +6,12 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 22:23:01 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/02 22:23:02 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:34:25 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*
-
-*/
 t_token	*get_new_token(char *str, t_type type)
 {
 	t_token	*token;

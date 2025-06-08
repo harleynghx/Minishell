@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 15:47:03 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:07:22 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,11 @@ int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
 char		**split_pipes(char *str, int start, int end, int index);
 	//COMMAND TABLE
-char		*rm_quotes(char *str);
+// char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
 void		cmd_to_lower_case(t_cmd_tbl *table);
-void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
-void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
+// void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
+// void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
 t_token		*tokenize(char *str, t_token *token);
@@ -203,22 +203,22 @@ bool		is_redirection(t_token *token);
 t_type		get_redirection_type(char *str, int start, int end);
 
 // EXPANDER
-char		*variable_doesnt_exist(void);
+// char		*variable_doesnt_exist(void);
 bool		dont_expand(char *str, int i);
 char		*copy_variable(char *content);
-char		*return_exit_status(t_shell *shell);
+// char		*return_exit_status(t_shell *shell);
 bool		expander(char **str, t_shell *shell);
 bool		has_dollar(char *str, t_shell *shell);
 void		expand_table(t_cmd_tbl *table, t_shell *shell);
 void		expand_tokens(t_token *tokens, t_shell *shell);
 char		*expand_cmd(t_cmd_tbl *table, t_shell *shell);
 void		expand_tables(t_cmd_tbl *tables, t_shell *shell);
-char		*replace_variable(char *variable, t_shell *shell);
+// char		*replace_variable(char *variable, t_shell *shell);
 char		*expand_dollars(char *doll_to_exp, t_shell *shell);
-bool		dont_expand_result(char *str, int i, int dq, int sq);
+// bool		dont_expand_result(char *str, int i, int dq, int sq);
 char		*type_to_expand(char *dollar_to_expand, t_shell *shell);
 void		copy_dollar_from_string(char **dst, char **s, int index);
-void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
+// void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
 
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
@@ -249,6 +249,8 @@ bool		change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val);
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
+bool heredocs_break(t_shell *shell, char *input, char *s_w);
+
 // OPEN HEREDOC
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE
