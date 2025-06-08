@@ -6,12 +6,29 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/08 17:14:32 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:51:11 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+void	cd_home(t_shell *shell)
+{
+	t_env	*hdr;
+
+	hdr = find_env_var(shell->env_head, "HOME");
+	if (!hdr)
+	{
+		shell->exit_code = 1;
+		if (shell->print == TRUE)
+			p_err("%scd: %s\n", SHELL, HOMELESS);
+	}
+	else if (ft_strlen(hdr->content) < 1)
+		printf("\n");
+	else if (chdir(hdr->content) == -1)
+		if (shell->print == TRUE)
+			p_err("%scd: %s: %s", SHELL, hdr->content, strerror(ENOENT));
+}
 void	cd_tilde(t_shell *shell, char *folder_path)
 {
 	t_env	*home;
@@ -41,24 +58,6 @@ void	cd_tilde(t_shell *shell, char *folder_path)
 	}
 }
 
-void	cd_home(t_shell *shell)
-{
-	t_env	*hdr;
-
-	hdr = find_env_var(shell->env_head, "HOME");
-	if (!hdr)
-	{
-		shell->exit_code = 1;
-		if (shell->print == TRUE)
-			p_err("%scd: %s\n", SHELL, HOMELESS);
-	}
-	else if (ft_strlen(hdr->content) < 1)
-		printf("\n");
-	else if (chdir(hdr->content) == -1)
-		if (shell->print == TRUE)
-			p_err("%scd: %s: %s", SHELL, hdr->content, strerror(ENOENT));
-}
-
 void	cd_oldpwd(t_shell *shell)
 {
 	t_env	*old_pwd;
@@ -86,16 +85,6 @@ void	cd_oldpwd(t_shell *shell)
 		printf("%s\n", old_pwd->content);
 }
 
-void	cd_forward(t_shell *shell, char *folder_path)
-{
-	if (chdir(folder_path) == -1)
-	{
-		shell->exit_code = 1;
-		if (shell->print == TRUE)
-			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
-	}
-}
-
 void	cd_back(t_shell *shell, char *dotdot, char *folder_path)
 {
 	if (ft_strcmp(dotdot, "..") == 1 && folder_path == NULL)
@@ -106,4 +95,13 @@ void	cd_back(t_shell *shell, char *dotdot, char *folder_path)
 	else if (chdir(dotdot) == -1)
 		if (shell->print == TRUE)
 			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
+}
+void	cd_forward(t_shell *shell, char *folder_path)
+{
+	if (chdir(folder_path) == -1)
+	{
+		shell->exit_code = 1;
+		if (shell->print == TRUE)
+			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
+	}
 }
