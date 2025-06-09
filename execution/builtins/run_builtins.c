@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:20:28 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/07 23:55:14 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:49:43 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	builtins(t_shell *shell, char *cmd, char **args)
 	else if (ft_strcmp(cmd, "export") == TRUE && shell->should_execute == TRUE)
 		return (export(shell, cmd, args), TRUE);
 	else if (ft_strcmp(cmd, "pwd") == TRUE && shell->should_execute == TRUE)
-		return (pwd(shell, args), TRUE);
+		return (pwd(shell), TRUE);
 	else if (ft_strcmp(cmd, "env") == TRUE && shell->should_execute == TRUE)
 		return (env(shell, args), TRUE);
 	else if (ft_strcmp(cmd, "exit") == TRUE)
