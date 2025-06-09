@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:53 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:43:12 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,23 @@ void	env(t_shell *shell, char **args)
 	if (args[1] != NULL)
 	{
 		p_err("env: %s\n", TMA);
+		shell->exit_code = 1;
 		return ;
 	}
+	if (shell->print != TRUE)
+		return ;
+	shell->exit_code = 0;
 	curr = shell->env_head;
-	if (shell->print == TRUE)
+	while (curr != NULL)
 	{
-		while (curr != NULL)
+		if (curr->content != NULL)
 		{
-			shell->exit_code = 0;
-			if (curr->content != NULL && curr->content[0] == ' '
-				&& ft_strlen(curr->content) == 1)
+			if (curr->content[0] == ' ' && ft_strlen(curr->content) == 1)
 				printf("%s=\n", curr->var_name);
-			else if (curr->content != NULL && shell->color_codes == TRUE)
+			else
 				printf("%s=%s\n", curr->var_name, curr->content);
-			else if (curr->content != NULL && strcmp_2(curr->var_name,
-					"TERM") == FALSE && shell->color_codes == FALSE)
-				printf("%s=%s\n", curr->var_name, curr->content);
-			curr = curr->next;
 		}
+		curr = curr->next;
 	}
 }
 

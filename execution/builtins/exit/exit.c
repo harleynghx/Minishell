@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:50 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 02:22:59 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,9 @@ void	exit_code(t_shell *shell, char **args)
 
 void	exit_code_on_pipe(t_shell *shell, char **args)
 {
-	int		i;
-	int		len;
 	char	*code_str;
 
-	i = 5;
-	len = ft_strlen(args[1]);
-	code_str = (char *)malloc(sizeof(char) * (len + 1));
+	code_str = ft_strdup(args[1]);
 	if (code_str == NULL)
 	{
 		if (shell->print == TRUE)
@@ -88,7 +84,6 @@ void	exit_code_on_pipe(t_shell *shell, char **args)
 		free_at_exit(shell);
 		exit(EXIT_FAILURE);
 	}
-	strcpy(code_str, args[1]);
 	shell->exit_code = ft_atoi(code_str);
 	free(code_str);
 	exit(shell->exit_code);

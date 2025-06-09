@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:25 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:58 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:13:02 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 void	echo(t_shell *shell, char *cmd, char **args)
 {
-	if (shell->print == TRUE)
+	if (!shell->print)
+		return ;
+	shell->exit_code = 0;
+	if (!args[1])
 	{
-		shell->exit_code = 0;
-		if (ft_strcmp(cmd, "echo") == TRUE && args[1] == NULL)
-			write(1, "\n", 1);
-		else if (is_flag_valid(args[1]) == TRUE)
-			handle_n_flag(args);
-		else
-			simple_echo(shell, args);
+		write(1, "\n", 1);
+		return ;
 	}
+	if (is_flag_valid(args[1]))
+		handle_n_flag(args);
+	else
+		simple_echo(shell, args);
 }
 
 void	handle_n_flag(char **args)
@@ -31,17 +33,14 @@ void	handle_n_flag(char **args)
 	int	j;
 
 	j = echo_n_flag_validator(args);
-	if (j == TRUE)
-		write(1, "", 1);
-	else
+	if (!args[j])
+		return ;
+	while (args[j])
 	{
-		while (args[j] != NULL)
-		{
-			print_without_quotes(args[j], 0, 0, 0);
-			if (args[j + 1] != NULL)
-				write(1, " ", 1);
-			j++;
-		}
+		print_without_quotes(args[j], 0, 0, 0);
+		if (args[j + 1])
+			write(1, " ", 1);
+		j++;
 	}
 }
 
@@ -50,20 +49,8 @@ int	echo_n_flag_validator(char **args)
 	int	i;
 
 	i = 1;
-	while (args[i + 1] != NULL)
-	{
-		if (is_flag_valid(args[i]) == TRUE)
-			i++;
-		else
-			return (i);
-	}
-	if (ft_strncmp(args[i], "-n", 2) == 0)
-	{
-		if (is_flag_valid(args[i]) == TRUE)
-			return (TRUE);
-		else
-			return (i);
-	}
+	while (args[i] && is_flag_valid(args[i]))
+		i++;
 	return (i);
 }
 
@@ -71,21 +58,16 @@ bool	is_flag_valid(char *arg)
 {
 	int	i;
 
-	if (ft_strcmp(arg, "-n") == TRUE)
-		return (TRUE);
-	else if (ft_strncmp(arg, "-n", 2) == 0)
+	if (!arg || arg[0] != '-' || arg[1] != 'n')
+		return (FALSE);
+	i = 2;
+	while (arg[i])
 	{
-		i = 1;
-		while (arg[i] != '\0')
-		{
-			if (arg[i] == 'n')
-				i++;
-			else
-				return (FALSE);
-		}
-		return (TRUE);
+		if (arg[i] != 'n')
+			return (FALSE);
+		i++;
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
 /*
@@ -94,16 +76,12 @@ or there is more than one arg with spaces
 */
 void	simple_echo(t_shell *shell, char **args)
 {
-	int	j;
+	int	j = 1;
 
-	j = 1;
-	while (args[j] != NULL)
+	while (args[j])
 	{
 		print_without_quotes(args[j], 0, 0, 0);
-		if (args[j + 1] != NULL && space_filled_token(args[j]) != TRUE)
-			write(1, " ", 1);
-		else if (args[j + 1] != NULL && space_filled_token(args[j]) == TRUE
-			&& space_filled_token(args[j + 1]) == TRUE)
+		if (args[j + 1])
 			write(1, " ", 1);
 		j++;
 	}
