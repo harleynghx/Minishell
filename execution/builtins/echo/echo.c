@@ -6,29 +6,13 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:25 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 03:13:02 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:20:06 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	echo(t_shell *shell, char *cmd, char **args)
-{
-	if (!shell->print)
-		return ;
-	shell->exit_code = 0;
-	if (!args[1])
-	{
-		write(1, "\n", 1);
-		return ;
-	}
-	if (is_flag_valid(args[1]))
-		handle_n_flag(args);
-	else
-		simple_echo(shell, args);
-}
-
-void	handle_n_flag(char **args)
+static void	handle_n_flag(char **args)
 {
 	int	j;
 
@@ -44,7 +28,7 @@ void	handle_n_flag(char **args)
 	}
 }
 
-int	echo_n_flag_validator(char **args)
+static int	echo_n_flag_validator(char **args)
 {
 	int	i;
 
@@ -54,7 +38,7 @@ int	echo_n_flag_validator(char **args)
 	return (i);
 }
 
-bool	is_flag_valid(char *arg)
+static bool	is_flag_valid(char *arg)
 {
 	int	i;
 
@@ -70,14 +54,11 @@ bool	is_flag_valid(char *arg)
 	return (TRUE);
 }
 
-/*
-writes the spaces between argumetns if they are not empty
-or there is more than one arg with spaces
-*/
-void	simple_echo(t_shell *shell, char **args)
+static void	simple_echo(t_shell *shell, char **args)
 {
-	int	j = 1;
+	int	j;
 
+	j = 1;
 	while (args[j])
 	{
 		print_without_quotes(args[j], 0, 0, 0);
@@ -86,4 +67,19 @@ void	simple_echo(t_shell *shell, char **args)
 		j++;
 	}
 	write(1, "\n", 1);
+}
+void	echo(t_shell *shell, char *cmd, char **args)
+{
+	if (!shell->print)
+		return ;
+	shell->exit_code = 0;
+	if (!args[1])
+	{
+		write(1, "\n", 1);
+		return ;
+	}
+	if (is_flag_valid(args[1]))
+		handle_n_flag(args);
+	else
+		simple_echo(shell, args);
 }

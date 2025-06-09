@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/09 19:49:57 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:19:47 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,8 @@ void		cd_back(t_shell *shell, char *dotdot, char *folder_path);
 
 // BUILTIN ECHO
 bool		is_in_dq(char *s, int i);
-bool		is_flag_valid(char *arg);
-void		handle_n_flag(char **args);
 bool		space_filled_token(char *str);
 bool		has_quote_in_string(char *str);
-int			echo_n_flag_validator(char **args);
-void		simple_echo(t_shell *shell, char **args);
 void		echo(t_shell *shell, char *cmd, char **args);
 int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
