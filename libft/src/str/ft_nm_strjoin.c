@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nm_strjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 02:53:45 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/21 02:53:46 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/08 22:08:24 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /*
 allocates memory for the concatenation of s1 and s2 and returns the new string.
