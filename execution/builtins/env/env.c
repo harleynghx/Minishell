@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/09 23:43:12 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 05:55:01 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@ don't try to print content if it's empty
 print all the variables in normal mode
 don't print term in no env mode
 */
-void	env(t_shell *shell, char **args)
+ void	env(t_shell *shell, char **args)
 {
 	t_env	*curr;
 
-	if (args[1] != NULL)
+	if (args[1])
 	{
-		p_err("env: %s\n", TMA);
-		shell->exit_code = 1;
+		if (shell->print)
+			p_err("env: '%s': No such file or directory\n", args[1]);
+		shell->exit_code = 127;
 		return ;
 	}
-	if (shell->print != TRUE)
+	if (!shell->print)
 		return ;
 	shell->exit_code = 0;
 	curr = shell->env_head;
-	while (curr != NULL)
+	while (curr)
 	{
-		if (curr->content != NULL)
+		if (curr->content)
 		{
-			if (curr->content[0] == ' ' && ft_strlen(curr->content) == 1)
+			if (curr->content[0] == ' ' && curr->content[1] == '\0')
 				printf("%s=\n", curr->var_name);
 			else
 				printf("%s=%s\n", curr->var_name, curr->content);
