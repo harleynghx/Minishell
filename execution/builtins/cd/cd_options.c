@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/08 22:40:25 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 05:51:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,43 @@ void	cd_home(t_shell *shell)
 			p_err("%scd: %s: %s\n", SHELL, home->content, strerror(errno));
 	}
 }
-void	cd_tilde(t_shell *shell, char *folder_path)
+static char	*get_home_path(t_shell *shell, char *folder_path)
 {
 	t_env	*home;
 	char	*suffix;
+
+	home = find_env_var(shell->env_head, "HOME");
+	if (!home || !home->content)
+	{
+		shell->exit_code = 1;
+		if (shell->print)
+			p_err("%scd: HOME not set\n", SHELL);
+		return (NULL);
+	}
+	suffix = folder_path + 1;
+	return (ft_nm_strjoin(home->content, suffix));
+}
+
+void	cd_tilde(t_shell *shell, char *folder_path)
+{
 	char	*full_path;
 
-	if (shell->envless == FALSE)
+	if (folder_path[0] != '~' || (folder_path[1] && folder_path[1] != '/'))
 	{
-		home = find_env_var(shell->env_head, "HOME");
-		if (!home || !home->content)
-		{
-			shell->exit_code = 1;
-			if (shell->print == TRUE)
-				p_err("%scd: HOME not set\n", SHELL);
-			return ;
-		}
-		suffix = ft_strtrim(folder_path, "~");
-		full_path = ft_nm_strjoin(home->content, suffix);
-		free(suffix);
+		if (chdir(folder_path) == -1 && shell->print)
+			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
+		return ;
 	}
-	else
-		full_path = ft_nm_strjoin("/Users/", shell->user_name);
-	if (chdir(full_path) == -1 && shell->print == TRUE)
+	full_path = shell->envless
+		? ft_nm_strjoin("/Users/", shell->user_name)
+		: get_home_path(shell, folder_path);
+	if (!full_path)
+		return ;
+	if (chdir(full_path) == -1 && shell->print)
 		p_err("%scd: %s: %s\n", SHELL, full_path, strerror(errno));
 	free(full_path);
 }
+
 
 void	cd_oldpwd(t_shell *shell)
 {
