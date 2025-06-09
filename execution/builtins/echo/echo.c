@@ -6,51 +6,47 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:25 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 04:55:24 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 06:10:30 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static bool	is_flag_valid(char *arg)
+int	is_flag_valid(char *s)
 {
 	int	i;
 
-	if (!arg || arg[0] != '-' || arg[1] != 'n')
-		return (false);
-	i = 2;
-	while (arg[i])
-	{
-		if (arg[i] != 'n')
-			return (false);
+	i = 1;
+	if (!s || s[0] != '-' || s[1] != 'n')
+		return (0);
+	while (s[i] == 'n')
 		i++;
-	}
-	return (true);
+	return (s[i] == '\0');
 }
 
 void	echo(t_shell *shell, char *cmd, char **args)
 {
 	int	i;
+	int	newline;
 
+	i = 1;
+	newline = 1;
+	(void)cmd;
 	if (!shell->print)
 		return ;
 	shell->exit_code = 0;
-	if (!args[1])
-	{
-		write(1, "\n", 1);
-		return ;
-	}
-	i = 1;
 	while (args[i] && is_flag_valid(args[i]))
+	{
+		newline = 0;
 		i++;
-	// Print args[i .. end]
+	}
 	while (args[i])
 	{
-		print_without_quotes(args[i], 0, 0, 0);
+		ft_putstr_fd(args[i], 1);
 		if (args[i + 1])
 			write(1, " ", 1);
 		i++;
 	}
-	if (!is_flag_valid(args[1]))
+	if (newline)
 		write(1, "\n", 1);
 }
