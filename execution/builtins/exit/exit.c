@@ -6,33 +6,54 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 02:22:59 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 06:00:19 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+static int	ft_isnumeric(const char *str)
+{
+	int	i;
+
+	if (!str || *str == '\0')
+		return (0);
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 void	exit_shell(t_shell *shell, char *cmd, char **args)
 {
-	if (shell->exec_on_pipe == FALSE)
+	if (shell->exec_on_pipe)
 	{
-		if (ft_strcmp(cmd, "exit") == TRUE && args[1] == NULL)
-			simple_exit(shell);
-		if (ft_strcmp(cmd, "exit") == TRUE && ft_strlen(args[1]) == 0)
-			exit_tma(shell, cmd);
-		else if (args[2] == NULL && args[1] != NULL)
-			exit_code(shell, args);
-		else if (shell->print == TRUE)
+		if (!args[1])
+			shell->exit_code = 0;
+		else if (ft_isnumeric(args[1]) && !args[2])
+			shell->exit_code = ft_atoi(args[1]) % 256;
+		else
 		{
-			if (ft_isalpha(args[1][0]))
-				exit_error_msg(shell, cmd, args[1], 0);
-			else
-				exit_error_msg(shell, cmd, args[1], 1);
-			return ;
+			if (shell->print && args[1])
+				p_err("%s%s: %s: numeric argument required\n", SHELL, cmd,
+					args[1]);
+			shell->exit_code = 255;
 		}
+		return ;
 	}
-	else if (args[2] == NULL && args[1] != NULL)
-		exit_code_on_pipe(shell, args);
+	if (ft_strcmp(cmd, "exit") == TRUE && args[1] == NULL)
+		simple_exit(shell);
+	if (ft_strcmp(cmd, "exit") == TRUE && ft_strlen(args[1]) == 0)
+		exit_tma(shell, cmd);
+	else if (args[2] == NULL && args[1] != NULL && ft_isnumeric(args[1]))
+		exit_code(shell, args);
+	else if (shell->print && args[1])
+		exit_error_msg(shell, cmd, args[1], !ft_isnumeric(args[1]));
 }
 
 void	simple_exit(t_shell *shell)
