@@ -6,106 +6,47 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:25 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:58 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 06:10:30 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	echo(t_shell *shell, char *cmd, char **args)
-{
-	if (shell->print == TRUE)
-	{
-		shell->exit_code = 0;
-		if (ft_strcmp(cmd, "echo") == TRUE && args[1] == NULL)
-			write(1, "\n", 1);
-		else if (is_flag_valid(args[1]) == TRUE)
-			handle_n_flag(args);
-		else
-			simple_echo(shell, args);
-	}
-}
-
-void	handle_n_flag(char **args)
-{
-	int	j;
-
-	j = echo_n_flag_validator(args);
-	if (j == TRUE)
-		write(1, "", 1);
-	else
-	{
-		while (args[j] != NULL)
-		{
-			print_without_quotes(args[j], 0, 0, 0);
-			if (args[j + 1] != NULL)
-				write(1, " ", 1);
-			j++;
-		}
-	}
-}
-
-int	echo_n_flag_validator(char **args)
+int	is_flag_valid(char *s)
 {
 	int	i;
 
 	i = 1;
-	while (args[i + 1] != NULL)
-	{
-		if (is_flag_valid(args[i]) == TRUE)
-			i++;
-		else
-			return (i);
-	}
-	if (ft_strncmp(args[i], "-n", 2) == 0)
-	{
-		if (is_flag_valid(args[i]) == TRUE)
-			return (TRUE);
-		else
-			return (i);
-	}
-	return (i);
+	if (!s || s[0] != '-' || s[1] != 'n')
+		return (0);
+	while (s[i] == 'n')
+		i++;
+	return (s[i] == '\0');
 }
 
-bool	is_flag_valid(char *arg)
+void	echo(t_shell *shell, char *cmd, char **args)
 {
 	int	i;
+	int	newline;
 
-	if (ft_strcmp(arg, "-n") == TRUE)
-		return (TRUE);
-	else if (ft_strncmp(arg, "-n", 2) == 0)
+	i = 1;
+	newline = 1;
+	(void)cmd;
+	if (!shell->print)
+		return ;
+	shell->exit_code = 0;
+	while (args[i] && is_flag_valid(args[i]))
 	{
-		i = 1;
-		while (arg[i] != '\0')
-		{
-			if (arg[i] == 'n')
-				i++;
-			else
-				return (FALSE);
-		}
-		return (TRUE);
+		newline = 0;
+		i++;
 	}
-	return (FALSE);
-}
-
-/*
-writes the spaces between argumetns if they are not empty
-or there is more than one arg with spaces
-*/
-void	simple_echo(t_shell *shell, char **args)
-{
-	int	j;
-
-	j = 1;
-	while (args[j] != NULL)
+	while (args[i])
 	{
-		print_without_quotes(args[j], 0, 0, 0);
-		if (args[j + 1] != NULL && space_filled_token(args[j]) != TRUE)
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
 			write(1, " ", 1);
-		else if (args[j + 1] != NULL && space_filled_token(args[j]) == TRUE
-			&& space_filled_token(args[j + 1]) == TRUE)
-			write(1, " ", 1);
-		j++;
+		i++;
 	}
-	write(1, "\n", 1);
+	if (newline)
+		write(1, "\n", 1);
 }

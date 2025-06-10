@@ -6,13 +6,13 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:48 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/07 23:33:42 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:45:30 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	**copy_2d_char_array(char **array)
+char	**duplicate_string_array(char **array)
 {
 	int		i;
 	char	**result;
@@ -41,7 +41,7 @@ void	clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table)
 			"-e") == TRUE && table->next == NULL)
 	{
 		free(cmd_path);
-		free_at_child(shell);
+		free_at_exit(shell);
 		exit(127);
 	}
 	else if (cmd_path == NULL && ft_strlen(table->cmd) == 0)
@@ -49,13 +49,13 @@ void	clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table)
 		if (shell->print == TRUE)
 			p_err("%s%s: %s\n", SHELL, table->cmd, CMD_NOT_FND);
 		free(cmd_path);
-		free_at_child(shell);
+		free_at_exit(shell);
 		exit(126);
 	}
 	if (shell->print == TRUE)
 		p_err("%s%s: %s\n", SHELL, table->cmd, CMD_NOT_FND);
 	free(cmd_path);
-	free_at_child(shell);
+	free_at_exit(shell);
 	exit(127);
 }
 
@@ -67,7 +67,7 @@ void	waitpid_to_get_exit_status(pid_t pid, t_shell *shell, int *status)
 	shell->exit_code = WEXITSTATUS(*status);
 }
 
-void	close_and_dup(t_shell *shell)
+void	reset_io_streams(t_shell *shell)
 {
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);

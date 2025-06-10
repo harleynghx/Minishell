@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/08 22:09:41 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:46:27 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,27 @@ execute commands on a pipeline
 */
 void	execute(t_shell *shell, t_cmd_tbl *table)
 {
-	if (invalid_redir_and_initiate_heredocs(table, shell) == true)
+	bool	is_invalid;
+
+	is_invalid = invalid_redir_and_initiate_heredocs(table, shell);
+	if (is_invalid)
 	{
 		contains_triple_redirection(shell->trimmed_prompt);
 		shell->exit_code = 258;
-		free_cmd_tbls(shell->cmd_tbls);
-		shell->cmd_tbls = NULL;
-		return ;
 	}
-	handle_heredocs(table, shell);
-	if (g_ctrl_c == TRUE && shell->heredoc_ctrl == TRUE)
+	else
 	{
-		unlink(table->heredoc_name);
-		free(table->heredoc_name);
-		table->heredoc_name = NULL;
-		g_ctrl_c = FALSE;
-		shell->heredoc_ctrl = FALSE;
-
-		free_cmd_tbls(shell->cmd_tbls);
-		shell->cmd_tbls = NULL;
-		write(1, "\n", 1);
-		return;
-	}
-	else if (g_ctrl_c == FALSE && table != NULL && table->next == NULL
-		&& table_size(table) == 1)
-		exec_without_pipes(table, shell);
-	else if (g_ctrl_c == FALSE && table != NULL && table->next != NULL)
-	{
-		shell->exec_on_pipe = TRUE;
-		exec_pipes(table, shell);
+		handle_heredocs(table, shell);
+		if (g_ctrl_c == FALSE && table)
+		{
+			if (!table->next && table_size(table) == 1)
+				exec_without_pipes(table, shell);
+			else
+			{
+				shell->exec_on_pipe = TRUE;
+				exec_pipes(table, shell);
+			}
+		}
 	}
 	free_cmd_tbls(shell->cmd_tbls);
 	shell->cmd_tbls = NULL;

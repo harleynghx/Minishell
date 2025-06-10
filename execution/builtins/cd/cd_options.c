@@ -6,86 +6,111 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/07 22:45:20 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:45:20 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	cd_tilde(t_shell *shell, char *folder_path)
-{
-	t_env	*home;
-	char	*path;
-	char	*tilde_trimmed;
-
-	if (shell->envless == FALSE)
-	{
-		home = find_env_var(shell->env_head, "HOME");
-		tilde_trimmed = ft_strtrim(folder_path, "~");
-		path = ft_nm_strjoin(home->content, tilde_trimmed);
-	}
-	else
-		path = ft_nm_strjoin("/Users/", shell->user_name);
-	if (chdir(path) == -1)
-	{
-		if (shell->print == TRUE)
-			p_err("%scd: %s: %s\n", SHELL, path, strerror(errno));
-		free(tilde_trimmed);
-		free(path);
-	}
-	else
-	{
-		if (shell->envless == FALSE)
-			free(tilde_trimmed);
-		free(path);
-	}
-}
-
 void	cd_home(t_shell *shell)
 {
-	t_env	*hdr;
+	t_env	*home;
 
-	hdr = find_env_var(shell->env_head, "HOME");
-	if (!hdr)
+	home = find_env_var(shell->env_head, "HOME");
+	if (!home || !home->content || !*home->content)
 	{
 		shell->exit_code = 1;
 		if (shell->print == TRUE)
 			p_err("%scd: %s\n", SHELL, HOMELESS);
+		return ;
 	}
-	else if (ft_strlen(hdr->content) < 1)
-		printf("\n");
-	else if (chdir(hdr->content) == -1)
+	if (chdir(home->content) == -1)
+	{
+		shell->exit_code = 1;
 		if (shell->print == TRUE)
-			p_err("%scd: %s: %s", SHELL, hdr->content, strerror(ENOENT));
+			p_err("%scd: %s: %s\n", SHELL, home->content, strerror(errno));
+	}
 }
+static char	*get_home_path(t_shell *shell, char *folder_path)
+{
+	t_env	*home;
+	char	*suffix;
+
+	home = find_env_var(shell->env_head, "HOME");
+	if (!home || !home->content)
+	{
+		shell->exit_code = 1;
+		if (shell->print)
+			p_err("%scd: HOME not set\n", SHELL);
+		return (NULL);
+	}
+	suffix = folder_path + 1;
+	return (ft_nm_strjoin(home->content, suffix));
+}
+
+void	cd_tilde(t_shell *shell, char *folder_path)
+{
+	char	*full_path;
+
+	if (folder_path[0] != '~' || (folder_path[1] && folder_path[1] != '/'))
+	{
+		if (chdir(folder_path) == -1 && shell->print)
+			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
+		return ;
+	}
+	full_path = shell->envless
+		? ft_nm_strjoin("/Users/", shell->user_name)
+		: get_home_path(shell, folder_path);
+	if (!full_path)
+		return ;
+	if (chdir(full_path) == -1 && shell->print)
+		p_err("%scd: %s: %s\n", SHELL, full_path, strerror(errno));
+	free(full_path);
+}
+
 
 void	cd_oldpwd(t_shell *shell)
 {
-	t_env	*old_pwd;
-	t_env	*curr_pwd;
+	t_env	*oldpwd;
 
-	if (shell->prev_prompt == NULL || shell->envless == TRUE)
+	if (shell->prev_prompt == NULL || shell->envless)
 	{
-		cd_slash_is_first_cmd(shell);
+		cd_oldpwd_fallback(shell);
 		return ;
 	}
-	old_pwd = find_env_var(shell->env_head, "OLDPWD");
-	if (!old_pwd)
+	oldpwd = find_env_var(shell->env_head, "OLDPWD");
+	if (!oldpwd || !oldpwd->content)
 	{
 		shell->exit_code = 1;
-		p_err("%scd: %s: %s\n", SHELL, "OLDPWD", strerror(errno));
+		if (shell->print)
+			p_err("%scd: OLDPWD not set\n", SHELL);
+		return ;
 	}
-	else if (old_pwd->content == NULL)
-		printf("\n");
-	else if (chdir(old_pwd->content) == -1)
+	if (chdir(oldpwd->content) == -1)
 	{
-		if (shell->envless == TRUE)
-			p_err("%scd: %s: %s\n", SHELL, old_pwd->content, strerror(errno));
+		shell->exit_code = 1;
+		if (shell->print)
+			p_err("%scd: %s: %s\n", SHELL, oldpwd->content, strerror(errno));
+		return ;
 	}
-	else if (shell->print == TRUE)
-		printf("%s\n", old_pwd->content);
+	if (shell->print)
+		printf("%s\n", oldpwd->content);
 }
 
+void	cd_back(t_shell *shell, char *path, char *display_path)
+{
+	if (chdir(path) == -1)
+	{
+		shell->exit_code = 1;
+		if (shell->print == TRUE)
+		{
+			if (display_path)
+				p_err("%scd: %s: %s\n", SHELL, display_path, strerror(errno));
+			else
+				p_err("%scd: %s: %s\n", SHELL, path, strerror(errno));
+		}
+	}
+}
 void	cd_forward(t_shell *shell, char *folder_path)
 {
 	if (chdir(folder_path) == -1)
@@ -94,16 +119,4 @@ void	cd_forward(t_shell *shell, char *folder_path)
 		if (shell->print == TRUE)
 			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
 	}
-}
-
-void	cd_back(t_shell *shell, char *dotdot, char *folder_path)
-{
-	if (ft_strcmp(dotdot, "..") == 1 && folder_path == NULL)
-	{
-		if (chdir(dotdot) == -1)
-			;
-	}
-	else if (chdir(dotdot) == -1)
-		if (shell->print == TRUE)
-			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
 }
