@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:08:23 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/27 14:08:23 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/11 03:13:56 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ char	*ft_remove_line(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
+	z++;
 	file_minus_line = malloc(sizeof(char) * (ft_strlen(buffer) - z + 1));
 	if (!file_minus_line)
 		return (NULL);
-	z++;
 	s = 0;
 	while (buffer[z])
 		file_minus_line[s++] = buffer[z++];
@@ -105,6 +105,20 @@ char	*ft_return_line(char *buffer)
 	return (line);
 }
 
+
+static void exit_code(char **buffer)
+{
+	int i;
+
+	i = 0;
+	while (i < 1024)
+	{
+		free(buffer[i]);
+		buffer[i] = NULL;
+		i++;
+	}
+}
+
 /*
 OPEN_MAX is the constant that defines the maximum number of open files allowed
 for a single program(1024) so with it we can read multiple 'fd' at the same time
@@ -121,6 +135,11 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024];
 	char		*line;
 
+	if (fd == -42)
+	{
+		exit_code(buffer);
+		return NULL;
+	}
 	if (read(fd, NULL, 0) == -1)
 	{
 		free(buffer[fd]);

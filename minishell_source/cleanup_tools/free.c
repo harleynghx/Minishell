@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:36 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 16:45:23 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/11 03:07:25 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	free_at_exit(t_shell *shell)
 	free(shell->prev_prompt);
 	free(shell->heredoc);
 	free(shell->prompt);
+	get_next_line(-42);
 	rl_clear_history();
 }

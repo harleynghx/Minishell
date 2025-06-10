@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:31:10 by zstenger          #+#    #+#             */
-/*   Updated: 2025/06/01 16:56:26 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:54:38 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	terminal_prompt(t_shell *shell)
 		free(shell->terminal_prompt);
 	directory = curr_dir(shell);
 	full = ft_nm_strjoin(directory, " $ ");
+	free(directory);
 	shell->terminal_prompt = full;
 	shell->cmd_has_been_executed = TRUE;
 }
