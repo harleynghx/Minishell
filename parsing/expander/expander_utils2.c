@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:34:34 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 19:35:43 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:50:02 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static bool	is_valid_var_char(char c)
 {
-	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'));
+	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a'
+			&& c <= 'z'));
 }
 
 static char	determine_delimiter(char *str, int i)
@@ -52,7 +52,7 @@ static void	extract_variable(char **dst, char *s, int i, char delim)
 
 void	copy_dollar_from_string(char **dst, char **s, int i)
 {
-	char delim;
+	char	delim;
 
 	if (!s || !*s || !dst)
 		return ;
