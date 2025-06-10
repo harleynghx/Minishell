@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 13:40:39 by zstenger          #+#    #+#             */
-/*   Updated: 2025/06/01 21:10:47 by harleyng         ###   ########.fr       */
+/*   Created: 2025/06/03 15:57:06 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/04 13:13:13 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,59 +38,59 @@ bool	has_dollar(char *str, t_shell *shell)
 	return (FALSE);
 }
 
-void	copy_dollar_from_string(char **dst, char **s, int index)
+void	copy_dollar_from_string(char **dst, char **s, int i)
 {
-	char	delimeter;
-	int		i;
-	int		doll;
+	char	delim;
+	int		j;
+	int		sign;
 
-	if (s[0][index + 1] == '?')
-		dst[0] = ft_strdup2(s[0], index, index + 2);
+	if (s[0][i + 1] == '?')
+		dst[0] = ft_strdup2(s[0], i, i + 2);
 	else
 	{
-		i = index;
-		doll = index + 1;
-		delimeter = ' ';
-		if (s[0][index + 1] == '(')
-			delimeter = ')';
-		if (index > 0 && s[0][index - 1] == '\'' )
-			delimeter = '\'';
-		if (index > 0 && s[0][index - 1] == '\"' )
-			delimeter = '\"';
-		while (s[0][i] != '\0' && s[0][i] != delimeter && ((s[0][doll] >= 48
-			&& 57 >= s[0][doll]) || (s[0][doll] >= 65 && 122 >= s[0][doll])))
+		j = i;
+		sign = i + 1;
+		delim = ' ';
+		if (s[0][i + 1] == '(')
+			delim = ')';
+		if (i > 0 && s[0][i - 1] == '\'' )
+			delim = '\'';
+		if (i > 0 && s[0][i - 1] == '\"' )
+			delim = '\"';
+		while (s[0][j] != '\0' && s[0][j] != delim && ((s[0][sign] >= 48
+			&& 57 >= s[0][sign]) || (s[0][sign] >= 65 && 122 >= s[0][sign])))
 		{
-			i++;
-			doll++;
+			j++;
+			sign++;
 		}
-		dst[0] = ft_strdup2(s[0], index, i + 1);
+		dst[0] = ft_strdup2(s[0], i, j + 1);
 	}
 }
 
-void	extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest)
+static void	extract_dollar(char **s, t_shell *sh, char **bf_sign, char **af_sign)
 {
 	int		i;
-	char	**doll;
+	char	**str;
 	char	*val;
 
-	doll = malloc(sizeof(char *));
+	str = malloc(sizeof(char *));
 	i = -1;
 	while (s[0][++i] != '\0')
 	{
 		if (s[0][i] == '$' && nb_esc_chars(s[0], i) % 2 == 0
 			&& dont_expand(s[0], i) != TRUE)
 		{
-			bef_doll[0] = ft_strdup2(s[0], 0, i);
-			copy_dollar_from_string(doll, s, i);
-			val = expand_dollars(doll[0], sh);
-			rest[0] = ft_strdup2(s[0], i + ft_strlen(*doll), ft_strlen(s[0]));
-			free(doll[0]);
-			*doll = ft_strjoin(bef_doll[0], val);
-			bef_doll[0] = ft_nm_strjoin(doll[0], rest[0]);
-			free(doll[0]);
-			free(doll);
+			bf_sign[0] = ft_strdup2(s[0], 0, i);
+			copy_dollar_from_string(str, s, i);
+			val = expand_dollars(str[0], sh);
+			af_sign[0] = ft_strdup2(s[0], i + ft_strlen(*str), ft_strlen(s[0]));
+			free(str[0]);
+			*str = ft_strjoin(bf_sign[0], val);
+			bf_sign[0] = ft_nm_strjoin(str[0], af_sign[0]);
+			free(str[0]);
+			free(str);
 			free(s[0]);
-			*s = *bef_doll;
+			*s = *bf_sign;
 			return ;
 		}
 	}

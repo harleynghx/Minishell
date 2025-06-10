@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:19:27 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 04:46:51 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:49:07 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	handle_sigint(int sig_num)
 	if (sig_num == SIGINT)
 	{
 		g_ctrl_c = TRUE;
-		write(1, "\n", 2);
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
