@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/02 19:54:11 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:39:34 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,27 @@ execute commands on a pipeline
 */
 void	execute(t_shell *shell, t_cmd_tbl *table)
 {
-	if (invalid_redir_and_initiate_heredocs(table, shell) == true)
+	bool	is_invalid;
+
+	is_invalid = invalid_redir_and_initiate_heredocs(table, shell);
+	if (is_invalid)
 	{
 		contains_triple_redirection(shell->trimmed_prompt);
 		shell->exit_code = 258;
-		free_cmd_tbls(shell->cmd_tbls);
-		shell->cmd_tbls = NULL;
-		return ;
 	}
-	handle_heredocs(table, shell);
-	if (g_ctrl_c == FALSE && table != NULL && table->next == NULL
-		&& table_size(table) == 1)
-		exec_without_pipes(table, shell);
-	else if (g_ctrl_c == FALSE && table != NULL && table->next != NULL)
+	else
 	{
-		shell->exec_on_pipe = TRUE;
-		exec_pipes(table, shell);
+		handle_heredocs(table, shell);
+		if (g_ctrl_c == FALSE && table)
+		{
+			if (!table->next && table_size(table) == 1)
+				exec_without_pipes(table, shell);
+			else
+			{
+				shell->exec_on_pipe = TRUE;
+				exec_pipes(table, shell);
+			}
+		}
 	}
 	free_cmd_tbls(shell->cmd_tbls);
 	shell->cmd_tbls = NULL;
