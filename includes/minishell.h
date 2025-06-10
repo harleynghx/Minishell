@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:50:55 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:59:15 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,12 @@ void		signals_parent(void);
 void		signal_ctrl_c_child(void);
 void		signal_ctrl_c_parent(void);
 void		signal_ctrl_backslash(void);
+void		signal_backslash(void);
 void		handle_sigint(int sig_num);
 void		signal_ctrl_backslash_child(void);
 void		signals(struct termios *mirror_termios);
 void		signals_child(struct termios *mirror_termios);
+void		handle_signals(struct termios *mirror_termios);
 void		save_settings_and_remove_c(struct termios *mirror_termios);
 
 // LEXER
@@ -152,8 +154,8 @@ bool		bad_pipe(t_shell *shell);
 bool		has_wrong_pipe(char *str);
 bool		redir_before(char *str, int i);
 bool		wrong_operator_check(char *str);
-bool		is_empty_line_passed(t_shell *shll);
-char		count_quotes(char *s, int sq, int dq);
+bool		is_emptyline(t_shell *shll);
+bool		count_quotes(char *s, int sq, int dq);
 int			nb_esc_chars(char *str, int last_ind);
 char		*ft_strdup2(char *str, int start, int end);
 
@@ -165,7 +167,7 @@ int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
 char		**split_pipes(char *str, int start, int end, int index);
 // COMMAND TABLE
-char		*rm_quotes(char *str);
+// char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
 void		cmd_to_lower_case(t_cmd_tbl *table);
 // void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
@@ -173,6 +175,7 @@ void		cmd_to_lower_case(t_cmd_tbl *table);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
 t_token		*tokenize(char *str, t_token *token);
+t_cmd_tbl	*new_cmd_table(void);
 // INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
