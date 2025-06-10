@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:46:36 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:41:56 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,5 @@ void	handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 		if (cmd_tbl_has_heredoc(cmd_tbl) == TRUE)
 			execute_heredocs(cmd_tbl, shell);
 		cmd_tbl = cmd_tbl->next;
-	}
-	if (g_ctrl_c == TRUE)
-	{
-		exit(1);
-	// 	unlink(cmd_tbl->heredoc_name);
-	// 	free(cmd_tbl->heredoc_name);
-	// 	cmd_tbl->heredoc_name = NULL;
-	// 	g_ctrl_c = FALSE;
-	// 	shell->heredoc_ctrl = FALSE;
-
-	// 	free_cmd_tbls(shell->cmd_tbls);
-	// 	shell->cmd_tbls = NULL;
-	// 	write(1, "\n", 1);
-	// 	return;
 	}
 }

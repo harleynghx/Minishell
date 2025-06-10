@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:51:57 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:44:46 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	execute(t_shell *shell, t_cmd_tbl *table)
 {
-	bool	is_invalid;
-
-	is_invalid = invalid_redir_and_initiate_heredocs(table, shell);
-	if (is_invalid)
+	if (invalid_redir_and_initiate_heredocs(table, shell))
 	{
 		contains_triple_redirection(shell->trimmed_prompt);
 		shell->exit_code = 258;

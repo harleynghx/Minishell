@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/08 01:20:35 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:41:11 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ bool heredocs_break(t_shell *shell, char *input, char *s_w)
 	if (g_ctrl_c == TRUE || input == NULL || (ft_strncmp(input, s_w,
 			ft_strlen(s_w)) == 0 && ((ft_strlen(input)
 				- 1) == ft_strlen(s_w))))
-				{
-					shell->heredoc_ctrl = TRUE;
 					return (TRUE);
-				}
 	return (FALSE);
 }
