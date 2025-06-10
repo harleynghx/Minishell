@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   fprintf.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:24:37 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/31 18:24:40 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:17:59 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/fprintf.h"
+#include "../../includes/fprintf.h"
 
 /*
 @param format->char string which contains plain chars, escape sequences
 and format specifications
-if there is format(input) checks the type of it
+if there is	format(input) checks the type of it
 if its a plain text, simply print it out
 else checks for the type of conversion and applies it and print the result
 */
@@ -35,8 +35,7 @@ int	p_err(const char *format, ...)
 		return (-1);
 	while (format[index] != '\0')
 	{
-		if (format[index] == '%'
-			&& *fpf_strchr("cspdiuxX%", format[index + 1]))
+		if (format[index] == '%' && *fpf_strchr("cspdiuxX%", format[index + 1]))
 		{
 			index++;
 			fpf_check_format(&args, format[index], input_len);
@@ -50,84 +49,71 @@ int	p_err(const char *format, ...)
 }
 
 /*
-int main(void)
+int	main(void)
 {
-	ft_printf("%% %");
-	
-	int ret1;
-	int ret2;
+	int				ret1;
+	int				ret2;
+	char			str1[] = "This is the first format specifier#&.';?/!\n";
+	int				i;
+	int				j;
+	int				l;
+	int				*ptr1;
+	int				*ptr2;
+	int				*ptr3;
+	int				*ptr4;
+	unsigned int	k;
 
-	char str1[] = "This is the first format specifier#&.';?/!\n";
+	ft_printf("%% %");
 	ret1 = ft_printf("%s", str1);
 	ret2 = printf("%s", str1);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
-	int i = -2147483648;
-	int j = 2147483647;
-	int l = 0;
-	int	*ptr1;
-	int	*ptr2;
-	int	*ptr3;
-	int	*ptr4;
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
+	i = -2147483648;
+	j = 2147483647;
+	l = 0;
 	ptr1 = &i;
 	ptr2 = &j;
 	ptr3 = &l;
 	ptr4 = NULL;
-
 	ret1 = ft_printf("%p\n%p\n%p\n%p\n", ptr1, ptr2, ptr3, ptr4);
 	ret2 = printf("%p\n%p\n%p\n%p\n", ptr1, ptr2, ptr3, ptr4);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	i = -2147483648;
 	j = 2147483647;
 	l = 0;
-
 	ret1 = ft_printf("%d\n%d\n%d\n", i, j, l);
 	ret2 = printf("%d\n%d\n%d\n", i, j, l);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	ret1 = ft_printf("%i\n%i\n%i\n", i, j, l);
 	ret2 = printf("%i\n%i\n%i\n", i, j, l);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
-	unsigned int k;
-	
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	i = -2147483648;
 	j = 0;
 	k = 4294967295;
-
 	ret1 = ft_printf("%u\n%u\n%u\n", i, j, k);
 	ret2 = printf("%u\n%u\n%u\n", i, j, k);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	i = -2147483648;
 	j = 0;
 	k = 42949627;
-	
 	ret1 = ft_printf("%x\n%x\n%x\n", i, j, k);
 	ret2 = printf("%x\n%x\n%x\n", i, j, k);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	ret1 = ft_printf("%X\n%X\n%X\n", i, j, k);
 	ret2 = printf("%X\n%X\n%X\n", i, j, k);
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n", ret2);
-
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n", ret2));
 	ret1 = ft_printf("%% %%%% %%\n");
 	ret2 = printf("%% %%%% %%\n");
-	printf("Here the return of ft_printf: 	%d\n", ret1);
-	printf("Here the return of printf: 	%d\n\n\n", ret2);
-	
+	printf("Here the return (of ft_printf: 	%d\n", ret1));
+	printf("Here the return (of printf: 	%d\n\n\n", ret2));
 	printf("CHECKING FOR LEAKS:\n\n");
 	system("leaks a.out");
-	
 	return (0);
 }
 */

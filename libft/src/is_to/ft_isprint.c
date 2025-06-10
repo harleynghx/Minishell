@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:46:31 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:25:17 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:14:47 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-//looks for printable characters by the ascii table
+// looks for printable characters by the ascii table
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)

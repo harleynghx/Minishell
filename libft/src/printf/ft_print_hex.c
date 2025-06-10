@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:46:37 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:47 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:19:06 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 /*
 @brief Divide the decimal number by 16.   Treat the division as an integer

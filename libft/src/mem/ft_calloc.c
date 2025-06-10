@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:46:10 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:21:36 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /*
-allocates enough memory for 'count' objects that are 
+allocates enough memory for 'count' objects that are
 'size' bytes of memory and returns a pointer to the allocated memory
 SIZE_MAX is the max value of type size_t and added for protection against
 segmentation fault

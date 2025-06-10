@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:46:48 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:27:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:21:08 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /*
 copies 's2' after 's1' with terminating null at the end
-s1 must have enough space to do so. not recommended to use for security 
+s1 must have enough space to do so. not recommended to use for security
 reasons
  dst_size == 0 is extra protection for edge case
 */
@@ -33,7 +33,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dst_size)
 		return (dst_size + src_len);
 	s = dst_len;
 	z = 0;
-	while ((dst_size - dst_len -1) > z && src[z])
+	while ((dst_size - dst_len - 1) > z && src[z])
 	{
 		dst[s] = src[z];
 		s++;

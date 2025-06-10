@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:20:23 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/02 20:56:58 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:20:58 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-/* locates the first occurance of 'c' in the string pointed by 's' 
+/* locates the first occurance of 'c' in the string pointed by 's'
 (term null is part of the string) and returns a pointer to the character
 or NULL if the char isn't found in the string
 */

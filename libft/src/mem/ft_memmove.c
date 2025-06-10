@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:46:36 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:21:41 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-/* copies 'len' bytes from string 'src' to string 'dst' 
+/* copies 'len' bytes from string 'src' to string 'dst'
 should be done in a non destructible way so shouldn't be copied more than the
 'dst' can hold
 */

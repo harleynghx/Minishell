@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:13:01 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:25:30 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:19:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /*
-if there is no new node returns null, if no list then the new node becames the 
+if there is no new node returns null, if no list then the new node becames the
 list otherwise checks for the last node of the list and adds a new one
 */
 void	ft_lstadd_back(t_list **lst, t_list *new_element)

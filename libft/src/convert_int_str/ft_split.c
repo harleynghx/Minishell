@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:28:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:24:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:16:23 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /*
 if no string, return
@@ -68,7 +68,7 @@ static char	*ft_word_copy(const char *str, int start, int end)
 	return (word);
 }
 
-/* 
+/*
 splitting the string at every delimeter (space) copy a new word until
 the next delimeter
 Null pointer should be set at the end.
@@ -118,12 +118,14 @@ char	**ft_split(char const *s, char c)
 /*
 #include "ft_strlen.c"
 #include <stdio.h>
+
 int	main(void)
 {
-	char    months[] = "JAN,FEB,,MAR,APR,MAY,JUN,JUL,,AUG,SEP,OCT,NOV,DEC,,";
+	char	months[] = "JAN,FEB,,MAR,APR,MAY,JUN,JUL,,AUG,SEP,OCT,NOV,DEC,,";
 	int		index;
 	char	delim;
 	char	**split;
+
 	printf("\nmonths=[%s]\n\n", months);
 	delim = ',';
 	split = ft_split(months, delim);

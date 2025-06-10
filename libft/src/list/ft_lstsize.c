@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:25:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:25:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:19:34 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-//counts the nodes on the list
+// counts the nodes on the list
 int	ft_lstsize(t_list *lst)
 {
 	int	z;

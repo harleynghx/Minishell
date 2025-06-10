@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:59:15 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:12:58 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -223,7 +222,7 @@ void		copy_dollar_from_string(char **dst, char **s, int index);
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
 void		execute(t_shell *shell, t_cmd_tbl *table);
-void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell); // EXECUTE CMD
+void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);
 void		execute_command(t_cmd_tbl *table, t_shell *shell);
 // COMMAND HANDLING
 char		*extract_path(t_shell *shell, char *command);
@@ -239,7 +238,7 @@ bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
-bool heredocs_break(t_shell *shell, char *input, char *s_w);
+bool		heredocs_break(t_shell *shell, char *input, char *s_w);
 
 // OPEN HEREDOC
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);

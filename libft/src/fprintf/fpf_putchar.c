@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fpf_putchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:19:11 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/31 18:19:12 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:17:52 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/fprintf.h"
+#include "../../includes/fprintf.h"
 
 /*
 writing chars and for calculating the length of the string

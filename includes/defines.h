@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:04 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/28 17:53:19 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:12:04 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DEFINES_H
 # define DEFINES_H
@@ -20,7 +19,7 @@
 
 # define SHELL "minishell: "
 
-//OPERATORS
+// OPERATORS
 # define SQUOTE 39
 # define DQUOTE 34
 # define PIPE "|"
@@ -28,30 +27,30 @@
 # define REDIRECTIONS "><"
 # define SPACES " \t\n\v\r\f"
 
-//OPEN
+// OPEN
 # define GIVE_PERM_WTH_RW 0644
 
-//TMP HEREDOC FILES
+// TMP HEREDOC FILES
 # define TMP_S "/tmp/heredoc"
 # define TMP_E ".XXXXXX"
 
-//HEREDOC TYPE
+// HEREDOC TYPE
 # define HD_PIPE "\033[1;34mpipe heredoc> \033[0m"
 # define HERE_DOC "\033[1;34mheredoc> \033[0m"
 
-//PROMPT
-	//ARROW GREEN
+// PROMPT
+// ARROW GREEN
 # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002  \001\e[1m\e[34m\002"
-	//ARROW RED
+// ARROW RED
 # define R_ARROW_SIGN "\001\e[1m\e[31m\002\001\u279c\002  \001\e[1m\e[34m\002"
 # define SPACE_SIGN "\001\033[1;96m\002 "
 # define X_SIGN "\001\e[1m\e[33m\002 \001\u2718\002 \001\e[0m\002"
 
-//PARSE ERROR
+// PARSE ERROR
 # define SYNTAX_ERROR "syntax error near unexpected token"
 # define SYNTAX_ERROR_NEWLINE "syntax error near unexpected token `newline'"
 
-//STDERRORS
+// STDERRORS
 # define FORK_ERROR "fork faild, no child has been created, we used protection"
 # define PIPE_ERROR "pipe failed"
 # define MALLOC_FAIL "memory allocation failed"

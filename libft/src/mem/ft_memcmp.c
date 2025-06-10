@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:34:56 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:21:38 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 /* compares byte against byte in string s1 and string s2 and both assumed to be
 'n' long. 0 if equal otherwise the difference between the first 2 differing

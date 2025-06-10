@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pf_putstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:13:51 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:19:03 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 /*
 print out null if no string after the format specifier

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:02:03 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:24:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:16:20 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-//counting the size of the input
+// counting the size of the input
 static size_t	ft_size_count(int n)
 {
 	int	size;
@@ -31,16 +31,16 @@ static size_t	ft_size_count(int n)
 
 /*
 converts the integer to the equivalent string (opposite of atoi)
-the string should be big enough to hold the result so it's allocated with 
+the string should be big enough to hold the result so it's allocated with
 malloc for the amount of chars and +1for the terminating null
-if the size is 0 but it isn't the terminating null yet, then it's a - 
+if the size is 0 but it isn't the terminating null yet, then it's a -
 number
 */
 char	*ft_itoa(int n)
 {
-	char		*str;
-	long		nbr;
-	size_t		size;
+	char	*str;
+	long	nbr;
+	size_t	size;
 
 	nbr = n;
 	size = ft_size_count(n);
@@ -50,7 +50,7 @@ char	*ft_itoa(int n)
 	if (!str)
 		return (NULL);
 	str[size] = '\0';
-		size--;
+	size--;
 	while (nbr > 0)
 	{
 		str[size] = nbr % 10 + '0';

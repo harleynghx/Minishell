@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_format.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 11:40:01 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:36 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:18:59 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 /*
 checking for the conversion type with conversion_type of the format in the
