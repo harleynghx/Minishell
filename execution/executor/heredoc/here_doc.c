@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/01 19:23:04 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:46:36 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,9 @@ char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 		p_err("%s%s\n", SHELL, strerror(errno));
 	while (1)
 	{
-		write(0, "> ", 2);
+		write(1, "> ", 2);
 		input = get_next_line(STDIN_FILENO);
-		if (g_ctrl_c == TRUE || input == NULL || (ft_strncmp(input, s_w,
-					ft_strlen(s_w)) == 0 && ((ft_strlen(input)
-						- 1) == ft_strlen(s_w))))
+		if (heredocs_break(shell, input, s_w))
 		{
 			free(input);
 			break ;
@@ -102,5 +100,19 @@ void	handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell)
 		if (cmd_tbl_has_heredoc(cmd_tbl) == TRUE)
 			execute_heredocs(cmd_tbl, shell);
 		cmd_tbl = cmd_tbl->next;
+	}
+	if (g_ctrl_c == TRUE)
+	{
+		exit(1);
+	// 	unlink(cmd_tbl->heredoc_name);
+	// 	free(cmd_tbl->heredoc_name);
+	// 	cmd_tbl->heredoc_name = NULL;
+	// 	g_ctrl_c = FALSE;
+	// 	shell->heredoc_ctrl = FALSE;
+
+	// 	free_cmd_tbls(shell->cmd_tbls);
+	// 	shell->cmd_tbls = NULL;
+	// 	write(1, "\n", 1);
+	// 	return;
 	}
 }

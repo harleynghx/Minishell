@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:18 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:50:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:36:39 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_shell
 	char			*trimmed_prompt;
 	char			*terminal_prompt;
 	char			*prompt;
+	bool			heredoc_ctrl;
 	struct termios	mirror_termios;
 	t_env			*env_head;
 	t_cmd_tbl		*cmd_tbls;

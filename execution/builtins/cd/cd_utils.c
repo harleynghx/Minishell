@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:21:08 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:29:36 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,26 @@ bool	strcmp_2(char *str1, char *str2)
 void	update_pwd_and_oldpwd(t_shell *shell, char *old_pwd)
 {
 	char	*new_pwd;
-	char	*pwd_join;
-	char	*old_pwd_join;
-	char	path[PATH_MAX];
+	char	*pwd_entry;
+	char	*oldpwd_entry;
 	int		save_code;
 
 	add_oldpwd_to_env(shell);
 	save_code = shell->exit_code;
-	new_pwd = getcwd(NULL, sizeof(path));
-	pwd_join = ft_nm_strjoin("PWD=", new_pwd);
-	old_pwd_join = ft_nm_strjoin("OLDPWD=", old_pwd);
-	replace_var_content(shell, old_pwd_join, "OLDPWD");
-	replace_var_content(shell, pwd_join, "PWD");
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
+		return ;
+	pwd_entry = ft_nm_strjoin("PWD=", new_pwd);
+	oldpwd_entry = ft_nm_strjoin("OLDPWD=", old_pwd);
+	if (pwd_entry && oldpwd_entry)
+	{
+		replace_var_content(shell, oldpwd_entry, "OLDPWD");
+		replace_var_content(shell, pwd_entry, "PWD");
+	}
 	shell->exit_code = save_code;
-	free(old_pwd_join);
-	free(pwd_join);
 	free(new_pwd);
+	free(pwd_entry);
+	free(oldpwd_entry);
 }
 
 void	add_oldpwd_to_env(t_shell *shell)
@@ -80,7 +84,7 @@ void	add_oldpwd_to_env(t_shell *shell)
 		add_new_variable(shell, "OLDPWD");
 }
 
-void	cd_slash_is_first_cmd(t_shell *shell)
+void	cd_oldpwd_fallback(t_shell *shell)
 {
 	if (shell->print == TRUE)
 		p_err("%scd: %s\n", SHELL, PWNED);

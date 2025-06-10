@@ -3,69 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 15:39:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/03/31 10:46:42 by zstenger         ###   ########.fr       */
+/*   Created: 2025/06/04 14:49:23 by liyu-her          #+#    #+#             */
+/*   Updated: 2025/06/04 14:49:24 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*expand_dollars(char *doll_to_exp, t_shell *shell)
+static char	*variable_doesnt_exist(void)
 {
-	char	*variable;
-	char	*expanded_dollar;
+	char	*space;
 
-	if (doll_to_exp[1] == '?')
-		expanded_dollar = return_exit_status(shell);
-	else
-	{
-		variable = type_to_expand(doll_to_exp, shell);
-		if (variable == NULL || *variable == '\0')
-			return (variable);
-		expanded_dollar = copy_variable(variable);
-		if (expanded_dollar[0] == ' ' && expanded_dollar[1] == '\0')
-		{
-			free(expanded_dollar);
-			expanded_dollar = variable_doesnt_exist();
-		}
-	}
-	return (expanded_dollar);
+	space = malloc(sizeof(char));
+	space[0] = '\0';
+	return (space);
 }
 
-char	*return_exit_status(t_shell *shell)
-{
-	char	*exit_status;
-
-	exit_status = ft_itoa(shell->exit_code);
-	return (exit_status);
-}
-
-char	*type_to_expand(char *dollar_to_expand, t_shell *shell)
-{
-	int		i;
-	char	*trimmed_dollar;
-	char	*expanded_dollar;
-
-	i = 0;
-	trimmed_dollar = ft_strtrim(dollar_to_expand, "$");
-	if (trimmed_dollar[0] == '(')
-	{
-		while (trimmed_dollar[i] != '\0')
-			i++;
-		if (trimmed_dollar[i - 1] == ')')
-			expanded_dollar = replace_variable(trimmed_dollar, shell);
-		else
-			expanded_dollar = variable_doesnt_exist();
-	}
-	else
-		expanded_dollar = replace_variable(trimmed_dollar, shell);
-	free(trimmed_dollar);
-	return (expanded_dollar);
-}
-
-char	*replace_variable(char *variable, t_shell *shell)
+static char	*replace_variable(char *variable, t_shell *shell)
 {
 	t_env	*curr;
 	char	*trimmed_variable;
@@ -92,11 +48,55 @@ char	*replace_variable(char *variable, t_shell *shell)
 	return (variable_doesnt_exist());
 }
 
-char	*variable_doesnt_exist(void)
+static char	*return_exit_status(t_shell *shell)
 {
-	char	*space;
+	char	*exit_status;
 
-	space = malloc(sizeof(char));
-	space[0] = '\0';
-	return (space);
+	exit_status = ft_itoa(shell->exit_code);
+	return (exit_status);
+}
+
+char	*expand_dollars(char *str, t_shell *shell)
+{
+	char	*variable;
+	char	*expanded_dollar;
+
+	if (str[1] == '?')
+		expanded_dollar = return_exit_status(shell);
+	else
+	{
+		variable = type_to_expand(str, shell);
+		if (variable == NULL || *variable == '\0')
+			return (variable);
+		expanded_dollar = copy_variable(variable);
+		if (expanded_dollar[0] == ' ' && expanded_dollar[1] == '\0')
+		{
+			free(expanded_dollar);
+			expanded_dollar = variable_doesnt_exist();
+		}
+	}
+	return (expanded_dollar);
+}
+
+char	*type_to_expand(char *dollar_to_expand, t_shell *shell)
+{
+	int		i;
+	char	*trimmed_dollar;
+	char	*expanded_dollar;
+
+	i = 0;
+	trimmed_dollar = ft_strtrim(dollar_to_expand, "$");
+	if (trimmed_dollar[0] == '(')
+	{
+		while (trimmed_dollar[i] != '\0')
+			i++;
+		if (trimmed_dollar[i - 1] == ')')
+			expanded_dollar = replace_variable(trimmed_dollar, shell);
+		else
+			expanded_dollar = variable_doesnt_exist();
+	}
+	else
+		expanded_dollar = replace_variable(trimmed_dollar, shell);
+	free(trimmed_dollar);
+	return (expanded_dollar);
 }

@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:26 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:35 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:48:59 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ void	unset_all_vars(t_shell *shell, char **args)
 t_env	*find_env_var(t_env *head, char *var_name)
 {
 	t_env	*curr;
+	size_t	name_len;
 
+	if (!var_name)
+		return (NULL);
+	name_len = ft_strlen(var_name);
 	curr = head;
 	while (curr != NULL)
 	{
-		if (ft_strncmp(curr->var_name, var_name, ft_strlen(var_name)) == 0
-			&& ft_strlen(curr->var_name) == ft_strlen(var_name))
+		if (curr->var_name
+			&& ft_strncmp(curr->var_name, var_name, name_len) == 0
+			&& ft_strlen(curr->var_name) == name_len)
 			return (curr);
 		curr = curr->next;
 	}

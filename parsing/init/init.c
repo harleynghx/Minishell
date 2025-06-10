@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:03:18 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/21 02:19:16 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/07 01:27:04 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_shell(t_shell *shell, char **env)
 	shell->prev_prompt = NULL;
 	shell->trimmed_prompt = NULL;
 	shell->terminal_prompt = NULL;
+	shell->heredoc_ctrl = FALSE;
 	shell->cmd_has_been_executed = TRUE;
 	shell->std_fds[0] = dup(STDIN_FILENO);
 	shell->std_fds[1] = dup(STDOUT_FILENO);

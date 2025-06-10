@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 00:54:58 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:50:55 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		shell_loop(t_shell *shell);
 void		addhistory(t_shell *shell);
 // bool		is_builtin(t_shell *shell);
 
-//PROMPT
+// PROMPT
 char		*curr_dir(t_shell *shell);
 void		terminal_prompt(t_shell *shell);
 
@@ -96,7 +96,7 @@ void		unset_all_vars(t_shell *shell, char **args);
 void		unset(t_shell *shell, char *cmd, char **args);
 
 // BUILTIN PWD
-void		pwd(t_shell *shell, char **args);
+void		pwd(t_shell *shell);
 
 // BUILTIN EXIT
 void		simple_exit(t_shell *shell);
@@ -113,8 +113,8 @@ void		cd_oldpwd(t_shell *shell);
 bool		strcmp_2(char *str1, char *str2);
 void		add_oldpwd_to_env(t_shell *shell);
 int			nb_delimited_words(char *s, char c);
-void		cd_slash_is_first_cmd(t_shell *shell);
-void		cd(t_shell *shell, char *cmd, char **args);
+void		cd_oldpwd_fallback(t_shell *shell);
+void		cd(t_shell *shell, char **args);
 void		cd_tilde(t_shell *shell, char *folder_path);
 void		cd_forward(t_shell *shell, char *folder_path);
 void		update_pwd_and_oldpwd(t_shell *shell, char *old_pwd);
@@ -122,20 +122,16 @@ void		cd_back(t_shell *shell, char *dotdot, char *folder_path);
 
 // BUILTIN ECHO
 bool		is_in_dq(char *s, int i);
-bool		is_flag_valid(char *arg);
-void		handle_n_flag(char **args);
 bool		space_filled_token(char *str);
 bool		has_quote_in_string(char *str);
-int			echo_n_flag_validator(char **args);
-void		simple_echo(t_shell *shell, char **args);
 void		echo(t_shell *shell, char *cmd, char **args);
 int			write_escapes(char *str, int escp_nb, int i);
 void		print_without_quotes(char *str, int i, int k, int dq);
 
-//INITIALIZE
+// INITIALIZE
 void		init_shell(t_shell *shell, char **env);
 
-//SIGNALS
+// SIGNALS
 void		signal_c(void);
 void		signals_parent(void);
 void		signal_ctrl_c_child(void);
@@ -168,16 +164,16 @@ bool		table_check(t_cmd_tbl *tables);
 int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
 char		**split_pipes(char *str, int start, int end, int index);
-	//COMMAND TABLE
+// COMMAND TABLE
 char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
-void		cmd_to_lover_case(t_cmd_tbl *table);
-void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
-void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
+void		cmd_to_lower_case(t_cmd_tbl *table);
+// void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
+// void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
 t_token		*tokenize(char *str, t_token *token);
-	//INIT TABLE
+// INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_redirs(t_cmd_tbl *cmd_tbl, t_token *token);
@@ -188,12 +184,12 @@ bool		is_printable(char c);
 t_cmd_tbl	*get_empty_cmd_table(void);
 int			token_list_size(t_token *token);
 t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new);
-	//ADD TOKEN
+// ADD TOKEN
 t_token		*token_flag(char *str, int *i, int *old_i, t_token *token);
 t_token		*token_word(char *str, int *i, int *old_i, t_token *token);
 t_token		*token_quote(char *str, int *i, int *old_i, t_token *token);
 t_token		*token_redir(char *str, int *i, int *old_i, t_token *tk);
-	//ADD TOKEN UTILS
+// ADD TOKEN UTILS
 t_token		*copy_token(t_token *token);
 t_token		*get_new_token(char *str, t_type type);
 t_token		*add_new_token2(t_token *tokens, t_token *new);
@@ -204,67 +200,56 @@ bool		is_redirection(t_token *token);
 t_type		get_redirection_type(char *str, int start, int end);
 
 // EXPANDER
-char		*variable_doesnt_exist(void);
+// char		*variable_doesnt_exist(void);
 bool		dont_expand(char *str, int i);
 char		*copy_variable(char *content);
-char		*return_exit_status(t_shell *shell);
+// char		*return_exit_status(t_shell *shell);
 bool		expander(char **str, t_shell *shell);
 bool		has_dollar(char *str, t_shell *shell);
 void		expand_table(t_cmd_tbl *table, t_shell *shell);
 void		expand_tokens(t_token *tokens, t_shell *shell);
 char		*expand_cmd(t_cmd_tbl *table, t_shell *shell);
 void		expand_tables(t_cmd_tbl *tables, t_shell *shell);
-char		*replace_variable(char *variable, t_shell *shell);
+// char		*replace_variable(char *variable, t_shell *shell);
 char		*expand_dollars(char *doll_to_exp, t_shell *shell);
-bool		dont_expand_result(char *str, int i, int dq, int sq);
+// bool		dont_expand_result(char *str, int i, int dq, int sq);
 char		*type_to_expand(char *dollar_to_expand, t_shell *shell);
 void		copy_dollar_from_string(char **dst, char **s, int index);
-void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
+// void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
 
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
 void		execute(t_shell *shell, t_cmd_tbl *table);
-void		exec_without_pipes(t_cmd_tbl *table, t_shell *shell);// EXECUTE CMD
-void		exit_after_builtin(t_shell *shell);
+void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell); // EXECUTE CMD
 void		execute_command(t_cmd_tbl *table, t_shell *shell);
-void		final_exec(char *cmd_path, t_cmd_tbl *table, t_shell *shell);
 // COMMAND HANDLING
 char		*extract_path(t_shell *shell, char *command);
 void		invalid_command(t_shell *shell, char *command);
 // PATH CHECK
-bool		is_a_directory(t_shell *shell, char *cmd);
 int			path_check(char *cmd_path, t_shell *shell);
-int			dot_at_path_start(t_shell *shell, char *path);
-int			slash_at_path_start(t_shell *shell, char *path);
-int			no_such_file_or_folder(char *command, t_shell *shell);
-int			dot_dot_slash_at_path_start(t_shell *shell, char *path);
 // HANDLE REDIRECTIONS
-t_token		*set_curr(t_token *curr);
-bool		std_out_error(t_shell *shell);
 bool		is_good_redirection(t_token *token);
 void		handle_redirections(t_shell *shell, t_cmd_tbl *table);
 int			open_file(t_type type, char *file_name, t_shell *shell);
 bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
-bool		change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val);
 // HEREDOC EXEC
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
+bool heredocs_break(t_shell *shell, char *input, char *s_w);
+
 // OPEN HEREDOC
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE
 // EXEC ONLY HEREDOC
-bool		invalid_redir_and_initiate_heredocs(t_cmd_tbl *table, t_shell *shell);
+bool		invalid_redir_and_initiate_heredocs(t_cmd_tbl *table,
+				t_shell *shell);
 // EXEC PIPES
-bool		pipe_has_redirs(t_token *token);
 void		exec_pipes(t_cmd_tbl *table, t_shell *shell);
-void		exec_last_pipe(t_cmd_tbl *table, t_shell *shell);
-void		pipe_child_process(t_cmd_tbl *table, t_shell *shell);
-void		pipe_exec_in_child(t_cmd_tbl *t, t_shell *s, int fd_in, int fd_out);
 // EXEC UTILS
 void		child_exit(t_shell *shell);
-void		close_and_dup(t_shell *shell);
-char		**copy_2d_char_array(char **array);
+void		reset_io_streams(t_shell *shell);
+char		**duplicate_string_array(char **array);
 void		clear_and_exit(t_shell *shell, char *cmd_path, t_cmd_tbl *table);
 void		waitpid_to_get_exit_status(pid_t pid, t_shell *shell, int *status);
 
@@ -282,15 +267,11 @@ bool		syntax_error_newline(void);
 // CLEANUP TOOLS
 void		free_env(t_env *head);
 void		free_at_exit(t_shell *shell);
-void		free_at_child(t_shell *shell);
 void		free_char_array(char **array);
 void		free_cmd_tbls(t_cmd_tbl *cmd_tbls);
 
 // what does the philosopher pigeon say?
 // TO BE OR NOT TO BE
-void		print_tokens(t_token *lexer);
-void		print_cmd_tbl(t_cmd_tbl *cmd_tbl);
-void		ft_print_2d_char_array(char **array_2d);
 
 int			g_ctrl_c;
 
