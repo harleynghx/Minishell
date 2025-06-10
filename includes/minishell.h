@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 23:12:30 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:21:20 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,5 @@ void		free_cmd_tbls(t_cmd_tbl *cmd_tbls);
 
 // what does the philosopher pigeon say?
 // TO BE OR NOT TO BE
-
-
 
 #endif

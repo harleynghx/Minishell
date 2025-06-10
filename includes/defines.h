@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:04 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 19:12:04 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:22:39 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@
 // HEREDOC TYPE
 # define HD_PIPE "\033[1;34mpipe heredoc> \033[0m"
 # define HERE_DOC "\033[1;34mheredoc> \033[0m"
-
-// PROMPT
-// ARROW GREEN
-# define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002  \001\e[1m\e[34m\002"
-// ARROW RED
-# define R_ARROW_SIGN "\001\e[1m\e[31m\002\001\u279c\002  \001\e[1m\e[34m\002"
-# define SPACE_SIGN "\001\033[1;96m\002 "
-# define X_SIGN "\001\e[1m\e[33m\002 \001\u2718\002 \001\e[0m\002"
 
 // PARSE ERROR
 # define SYNTAX_ERROR "syntax error near unexpected token"
