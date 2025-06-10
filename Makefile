@@ -54,7 +54,7 @@ PARSER			= parser/parser \
 				  parser/remove_quotes \
 
 EXPANDER		= expander/expander \
-				  expander/extra_utils \
+				  expander/dont_expand \
 				  expander/expand_tokens \
 				  expander/expander_utils \
 
@@ -108,9 +108,6 @@ BREW			= /Users/$(USER)/.brew/bin
 READLINE		= /Users/$(USER)/.brew/opt/readline/include/readline
 
 run: brew_check
-# @$(SLEEP)
-# @clear
-# @./$(NAME)
 
 brew_check:
 	@if [ -d $(BREW) ]; then \
@@ -153,10 +150,6 @@ $(OBJ_DIR)%.o : $(MIN_DIR)%.c
 	@mkdir -p $(@D)
 	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
-# $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-# 	@mkdir -p $(@D)
-# 	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
-
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
@@ -187,31 +180,6 @@ re: fclean all
 
 r:
 	@./$(NAME)
-
-v:
-	valgrind ./minishell
-
-vm:
-	valgrind --read-var-info=yes --leak-check=full --track-origins=yes ./minishell
-
-vf:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./minishell
-
-ne:
-	env -i ./minishell
-
-tester:
-	@if [ -d 42_minishell_tester ]; then \
-		cd 42_minishell_tester; \
-		bash tester.sh m ; \
-	else \
-		git clone https://github.com/zstenger93/42_minishell_tester.git; \
-		cd 42_minishell_tester; \
-		bash tester.sh m; \
-	fi
-
-rt:
-	rm -rf 42_minishell_tester
 
 DEF_COLOR = \033[0;39m
 CYAN3 = \033[1;4;96m

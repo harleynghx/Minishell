@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 03:19:47 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:59:15 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -135,12 +136,14 @@ void		signal_c(void);
 void		signals_parent(void);
 void		signal_ctrl_c_child(void);
 void		signal_ctrl_c_parent(void);
+void		signal_ctrl_backslash(void);
 void		signal_backslash(void);
 void		handle_sigint(int sig_num);
 void		signal_ctrl_backslash_child(void);
 void		signals(struct termios *mirror_termios);
 void		signals_child(struct termios *mirror_termios);
 void		handle_signals(struct termios *mirror_termios);
+void		save_settings_and_remove_c(struct termios *mirror_termios);
 
 // LEXER
 bool		is_space(char c);
@@ -164,14 +167,15 @@ int			count_pipes(char *str);
 int			skip_quotes(char *str, int index);
 char		**split_pipes(char *str, int start, int end, int index);
 // COMMAND TABLE
-char		*rm_quotes(char *str);
+// char		*rm_quotes(char *str);
 void		init_cmd_args(t_cmd_tbl *tables);
-void		cmd_to_lover_case(t_cmd_tbl *table);
-void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
-void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
+void		cmd_to_lower_case(t_cmd_tbl *table);
+// void		rm_quotes_table(t_cmd_tbl *table, t_shell *shell);
+// void		rm_quotes_tokens(t_token *tokens, t_shell *shell);
 t_cmd_tbl	*create_cmd_table(char **str_arr, t_shell *shell);
 void		rm_quotes_tables(t_cmd_tbl *table, t_shell *shell);
 t_token		*tokenize(char *str, t_token *token);
+t_cmd_tbl	*new_cmd_table(void);
 // INIT TABLE
 t_token		*assign_cmd(t_cmd_tbl *cmd_tbl, t_token *token);
 t_token		*assign_args(t_cmd_tbl *cmd_tbl, t_token *token);
@@ -180,7 +184,7 @@ char		**get_cmd_args_from_token(char *cmd, t_token *token);
 t_cmd_tbl	*init_cmd_table(t_cmd_tbl *cmd_tbls, t_token *tokens);
 // CMD TABLE UTILS
 bool		is_printable(char c);
-t_cmd_tbl	*new_cmd_table(void);
+t_cmd_tbl	*get_empty_cmd_table(void);
 int			token_list_size(t_token *token);
 t_cmd_tbl	*add_new_cmd_tbl(t_cmd_tbl *cmd_tbl, t_cmd_tbl *new);
 // ADD TOKEN
@@ -199,22 +203,22 @@ bool		is_redirection(t_token *token);
 t_type		get_redirection_type(char *str, int start, int end);
 
 // EXPANDER
-char		*variable_doesnt_exist(void);
+// char		*variable_doesnt_exist(void);
 bool		dont_expand(char *str, int i);
 char		*copy_variable(char *content);
-char		*return_exit_status(t_shell *shell);
+// char		*return_exit_status(t_shell *shell);
 bool		expander(char **str, t_shell *shell);
 bool		has_dollar(char *str, t_shell *shell);
 void		expand_table(t_cmd_tbl *table, t_shell *shell);
 void		expand_tokens(t_token *tokens, t_shell *shell);
 char		*expand_cmd(t_cmd_tbl *table, t_shell *shell);
 void		expand_tables(t_cmd_tbl *tables, t_shell *shell);
-char		*replace_variable(char *variable, t_shell *shell);
+// char		*replace_variable(char *variable, t_shell *shell);
 char		*expand_dollars(char *doll_to_exp, t_shell *shell);
-bool		dont_expand_result(char *str, int i, int dq, int sq);
+// bool		dont_expand_result(char *str, int i, int dq, int sq);
 char		*type_to_expand(char *dollar_to_expand, t_shell *shell);
 void		copy_dollar_from_string(char **dst, char **s, int index);
-void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
+// void		extract_dollar(char **s, t_shell *sh, char **bef_doll, char **rest);
 
 // EXECUTOR
 int			table_size(t_cmd_tbl *table);
@@ -235,6 +239,8 @@ bool		has_wrong_redir(t_shell *shell, t_token *token, t_cmd_tbl *table);
 char		*stop_word(char *str, t_shell *shell);
 void		handle_heredocs(t_cmd_tbl *cmd_tbl, t_shell *shell);
 char		*heredoc(t_cmd_tbl *cmd_tbl, char *stop_word, t_shell *shell);
+bool heredocs_break(t_shell *shell, char *input, char *s_w);
+
 // OPEN HEREDOC
 int			open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token);
 // PIPELINE

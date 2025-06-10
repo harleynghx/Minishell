@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:08 by harleyng          #+#    #+#             */
-/*   Updated: 2025/05/19 14:20:04 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:41:11 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,13 @@ char	*stop_word(char *str, t_shell *shell)
 	result = ft_strtrim(str, trim);
 	free(trim);
 	return (result);
+}
+
+bool heredocs_break(t_shell *shell, char *input, char *s_w)
+{
+	if (g_ctrl_c == TRUE || input == NULL || (ft_strncmp(input, s_w,
+			ft_strlen(s_w)) == 0 && ((ft_strlen(input)
+				- 1) == ft_strlen(s_w))))
+					return (TRUE);
+	return (FALSE);
 }

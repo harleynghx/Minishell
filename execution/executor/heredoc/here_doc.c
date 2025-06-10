@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:15 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:52:19 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:54:34 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,9 @@ char	*heredoc(t_cmd_tbl *cmd_tbl, char *s_w, t_shell *shell)
 		p_err("%s%s\n", SHELL, strerror(errno));
 	while (1)
 	{
-		write(0, "> ", 2);
+		write(1, "> ", 2);
 		input = get_next_line(STDIN_FILENO);
-		if (g_ctrl_c == TRUE || input == NULL || (ft_strncmp(input, s_w,
-					ft_strlen(s_w)) == 0 && ((ft_strlen(input)
-						- 1) == ft_strlen(s_w))))
+		if (heredocs_break(shell, input, s_w))
 		{
 			free(input);
 			break ;

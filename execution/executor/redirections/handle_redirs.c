@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/04 16:40:25 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:01:55 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ bool	is_good_redirection(t_token *token)
 		return (TRUE);
 	return (FALSE);
 }
-
