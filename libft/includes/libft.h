@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:38:11 by zstenger          #+#    #+#             */
-/*   Updated: 2025/06/10 19:14:01 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:36:49 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(char const *s, char c);
 
 char				*ft_itoa(int n);
-
-char				*ft_itoa1(int value, char *str, int base);
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 

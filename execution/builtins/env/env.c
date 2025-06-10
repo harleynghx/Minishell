@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 05:55:01 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:23:06 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ don't try to print content if it's empty
 print all the variables in normal mode
 don't print term in no env mode
 */
- void	env(t_shell *shell, char **args)
+void	env(t_shell *shell, char **args)
 {
 	t_env	*curr;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:01:31 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:45:20 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:24:21 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,14 @@ void	cd_tilde(t_shell *shell, char *folder_path)
 			p_err("%scd: %s: %s\n", SHELL, folder_path, strerror(errno));
 		return ;
 	}
-	full_path = shell->envless
-		? ft_nm_strjoin("/Users/", shell->user_name)
-		: get_home_path(shell, folder_path);
+	full_path = shell->envless ? ft_nm_strjoin("/Users/",
+			shell->user_name) : get_home_path(shell, folder_path);
 	if (!full_path)
 		return ;
 	if (chdir(full_path) == -1 && shell->print)
 		p_err("%scd: %s: %s\n", SHELL, full_path, strerror(errno));
 	free(full_path);
 }
-
 
 void	cd_oldpwd(t_shell *shell)
 {

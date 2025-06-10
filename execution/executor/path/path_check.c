@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:40 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:46:42 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:26:12 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	check_executable_path(t_shell *shell, char *path)
 		return (TRUE);
 	return (no_such_file_or_folder(path, shell), FALSE);
 }
+
 int	path_check(char *path, t_shell *shell)
 {
 	if (path[0] == '.' && path[1] == '.' && path[2] == '/'
@@ -58,4 +59,3 @@ int	path_check(char *path, t_shell *shell)
 	}
 	return (FALSE);
 }
-
