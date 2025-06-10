@@ -6,23 +6,12 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:59 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:46:27 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:51:57 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-/*
-table has wrong redir:
-	exec heredocs but only until the point of the error
-	delete the tmp files, nothing else executes
-	exit
-handle heredocs:
-	execute all heredocs
-	save the filenames in array
-execute a simple command
-execute commands on a pipeline
-*/
 void	execute(t_shell *shell, t_cmd_tbl *table)
 {
 	bool	is_invalid;
