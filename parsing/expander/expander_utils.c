@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:57:06 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/10 19:45:44 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:49:37 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ bool	has_dollar(char *str, t_shell *shell)
 	}
 	return (FALSE);
 }
-
 
 static void	extract_dollar(char **s, t_shell *sh, char **bf_sign,
 		char **af_sign)
