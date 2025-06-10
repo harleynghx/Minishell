@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:59:15 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 21:14:27 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@
 #  include <readline/history.h>
 #  include <readline/readline.h>
 # else
-#  include </home/linuxbrew/.linuxbrew/opt/readline/include/readline/history.h>
-#  include </home/linuxbrew/.linuxbrew/opt/readline/include/readline/readline.h>
+#  include </usr/include/readline/history.h>
+#  include </usr/include/readline/readline.h>
 #  include <sys/wait.h>
 # endif
+
+extern int	g_ctrl_c;
 
 // MAIN UTILS
 int			cmd(t_shell *shell, char *str, int s);
@@ -276,6 +278,6 @@ void		free_cmd_tbls(t_cmd_tbl *cmd_tbls);
 // what does the philosopher pigeon say?
 // TO BE OR NOT TO BE
 
-int			g_ctrl_c;
+
 
 #endif
