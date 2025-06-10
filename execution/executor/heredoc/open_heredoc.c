@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:22 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/03 02:33:04 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:26:45 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static bool	is_last_heredoc(t_token *token, t_token *redirs)
 		return (TRUE);
 	return (FALSE);
 }
+
 int	open_heredoc(t_cmd_tbl *table, t_shell *shell, t_token *token)
 {
 	int	fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:57:06 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/04 13:13:13 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:45:44 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,43 +31,15 @@ bool	has_dollar(char *str, t_shell *shell)
 			shell->cmd_has_been_executed = FALSE;
 			return (FALSE);
 		}
-		else if (str[i] == '$'
-			&& ft_pf_strchr(SPACES, str[i + 1]) == NULL)
+		else if (str[i] == '$' && ft_pf_strchr(SPACES, str[i + 1]) == NULL)
 			return (TRUE);
 	}
 	return (FALSE);
 }
 
-void	copy_dollar_from_string(char **dst, char **s, int i)
-{
-	char	delim;
-	int		j;
-	int		sign;
 
-	if (s[0][i + 1] == '?')
-		dst[0] = ft_strdup2(s[0], i, i + 2);
-	else
-	{
-		j = i;
-		sign = i + 1;
-		delim = ' ';
-		if (s[0][i + 1] == '(')
-			delim = ')';
-		if (i > 0 && s[0][i - 1] == '\'' )
-			delim = '\'';
-		if (i > 0 && s[0][i - 1] == '\"' )
-			delim = '\"';
-		while (s[0][j] != '\0' && s[0][j] != delim && ((s[0][sign] >= 48
-			&& 57 >= s[0][sign]) || (s[0][sign] >= 65 && 122 >= s[0][sign])))
-		{
-			j++;
-			sign++;
-		}
-		dst[0] = ft_strdup2(s[0], i, j + 1);
-	}
-}
-
-static void	extract_dollar(char **s, t_shell *sh, char **bf_sign, char **af_sign)
+static void	extract_dollar(char **s, t_shell *sh, char **bf_sign,
+		char **af_sign)
 {
 	int		i;
 	char	**str;

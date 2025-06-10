@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dont_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:36:59 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/03 19:56:54 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:28:06 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ bool	dont_expand(char *str, int i)
 		return (TRUE);
 	return (dont_expand_result(str, i, 0, 0));
 }
-

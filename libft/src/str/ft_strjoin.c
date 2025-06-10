@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:14:33 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:27:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:21:07 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -24,7 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s2 == NULL)
 		return (s1);
 	total = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *) malloc(total * sizeof(char));
+	str = (char *)malloc(total * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (s1[j])

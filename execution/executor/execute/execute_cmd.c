@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:17:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 15:45:07 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:27:37 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	exit_after_builtin(t_shell *shell)
 	free_at_exit(shell);
 	exit(exit_code);
 }
+
 static bool	is_a_directory(t_shell *shell, char *cmd)
 {
 	int	i;
@@ -36,7 +37,9 @@ static bool	is_a_directory(t_shell *shell, char *cmd)
 	}
 	return (FALSE);
 }
-static void	exec_command_with_env(char *cmd_path, t_cmd_tbl *table, t_shell *shell)
+
+static void	exec_command_with_env(char *cmd_path, t_cmd_tbl *table,
+		t_shell *shell)
 {
 	char	**cmd_args;
 	char	**env;
@@ -58,6 +61,7 @@ static void	exec_command_with_env(char *cmd_path, t_cmd_tbl *table, t_shell *she
 		exit(exit_code);
 	}
 }
+
 void	execute_command(t_cmd_tbl *table, t_shell *shell)
 {
 	char	*cmd_path;

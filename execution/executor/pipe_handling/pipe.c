@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:18:57 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/05 19:08:12 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:27:11 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ static bool	pipe_has_redirs(t_token *token)
 	while (token != NULL)
 	{
 		if (token->type == APPEND || token->type == OUTPUT)
-		return (true);
+			return (true);
 		token = token->next;
 	}
 	return (FALSE);
 }
-static void	exec_child_pipe_cmd(t_cmd_tbl *table, t_shell *shell, int fd_read, int fd_write)
+
+static void	exec_child_pipe_cmd(t_cmd_tbl *table, t_shell *shell, int fd_read,
+		int fd_write)
 {
 	signals_child(&shell->mirror_termios);
 	shell->print = TRUE;
@@ -32,6 +34,7 @@ static void	exec_child_pipe_cmd(t_cmd_tbl *table, t_shell *shell, int fd_read, i
 	handle_redirections(shell, table);
 	execute_command(table, shell);
 }
+
 static void	prepare_pipe_and_fork(t_cmd_tbl *table, t_shell *shell)
 {
 	pid_t	pid;
@@ -104,4 +107,3 @@ void	exec_pipes(t_cmd_tbl *table, t_shell *shell)
 	while (pid != -1)
 		pid = waitpid(0, &status, 0);
 }
-

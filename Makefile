@@ -54,6 +54,7 @@ EXPANDER		= expander/expander \
 				  expander/dont_expand \
 				  expander/expand_tokens \
 				  expander/expander_utils \
+				  expander/expander_utils2 \
 
 EXECUTOR		= executor/open/open \
 				  executor/execute/execute \

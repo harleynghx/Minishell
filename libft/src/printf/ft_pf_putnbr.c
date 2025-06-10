@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pf_putnbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:13:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:19:02 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 /*
 if the number is smaller than 0 print the minus sign and
 take it off from the number by multiplying it by -1
-and then print it after te sign with the 2nd if or the 
+and then print it after te sign with the 2nd if or the
 else statement
 */
 void	ft_pf_putnbr(long int number, int *input_len)

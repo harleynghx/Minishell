@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:26:56 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:15:52 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/libft.h"
+#include "../../includes/libft.h"
 
-//writes a new line at the end of the string
+// writes a new line at the end of the string
 void	ft_putendl_fd(char *s, int fd)
 {
 	if (!s)

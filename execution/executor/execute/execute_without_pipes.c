@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_without_pipes.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:20:09 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 16:10:23 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:27:46 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	simple_exec_in_child(t_shell *shell, t_cmd_tbl *table)
 	}
 	child_exit(shell);
 }
+
 void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 {
 	int		status;
@@ -46,4 +47,3 @@ void	exec_without_pipes(t_cmd_tbl *table, t_shell *shell)
 	else
 		shell->exit_code = 258;
 }
-

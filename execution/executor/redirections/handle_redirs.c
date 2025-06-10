@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 03:05:46 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 16:01:55 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:25:31 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_token	*set_curr(t_token *curr)
 		curr = curr->next;
 	return (curr);
 }
+
 static bool	std_out_error(t_shell *shell)
 {
 	shell->exit_code = errno;
@@ -27,6 +28,7 @@ static bool	std_out_error(t_shell *shell)
 		p_err("%s%s\n", SHELL, strerror(errno));
 	return (TRUE);
 }
+
 static bool	change_stdin_out(t_type type, int fd, t_shell *shell, int ret_val)
 {
 	if (type == HEREDOC)

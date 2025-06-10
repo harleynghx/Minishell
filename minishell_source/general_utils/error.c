@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:06:14 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/05/20 19:10:10 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:11:26 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_arg(int argc)
 {
 	if (argc != 1)
 	{
-		printf(RED  "ERROR, program takes no argument\n");
+		printf(RED "ERROR, program takes no argument\n");
 		exit(EXIT_SUCCESS);
 	}
 }

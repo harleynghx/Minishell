@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:45:48 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 16:24:15 by zstenger         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:16:16 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 	sign = 1;
 	while (str[z] == ' ' || str[z] == '\f' || str[z] == '\n' || str[z] == '\r'
 		|| str[z] == '\t' || str[z] == '\v')
-			z++;
+		z++;
 	if (str[z] == '-')
 	{
 		sign *= (-1);

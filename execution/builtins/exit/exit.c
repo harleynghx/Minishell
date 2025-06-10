@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:52 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 06:00:19 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:23:37 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	ft_isnumeric(const char *str)
 	}
 	return (1);
 }
+
 void	exit_shell(t_shell *shell, char *cmd, char **args)
 {
 	if (shell->exec_on_pipe)
