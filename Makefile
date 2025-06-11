@@ -99,7 +99,7 @@ run: all
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) -g -lreadline $(OBJ) $(LIBFT) -o minishell $(DN)
+	@$(CC) $(CFLAGS) -g3 -lreadline $(OBJ) $(LIBFT) -o minishell $(DN)
 	@cd obj/general_utils && touch user.txt && echo $$USER > user.txt
 
 $(OBJ_DIR)%.o : $(EXE_DIR)%.c

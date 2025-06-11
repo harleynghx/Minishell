@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:57:06 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/10 19:49:37 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:32:11 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	extract_dollar(char **s, t_shell *sh, char **bf_sign,
 	char	**str;
 	char	*val;
 
-	str = malloc(sizeof(char *));
+	str = ft_calloc(1, sizeof(char *));
 	i = -1;
 	while (s[0][++i] != '\0')
 	{
