@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:25 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/04 16:28:20 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:36:25 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ void	rm_quotes_tables(t_cmd_tbl *tables, t_shell *shell)
 			tables->cmd = tmp;
 			cmd_to_lower_case(tables);
 		}
-		if (strcmp_2(tables->cmd, "echo") == FALSE
-			&& strcmp_2(tables->cmd, "export") == FALSE)
-			rm_quotes_table(tables, shell);
+		rm_quotes_table(tables, shell);
 		tables = tables->next;
 	}
 }
