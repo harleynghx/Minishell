@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:08:23 by liyu-her          #+#    #+#             */
-/*   Updated: 2025/06/11 03:13:56 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:31:50 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,9 @@ char	*ft_return_line(char *buffer)
 	return (line);
 }
 
-
-static void exit_code(char **buffer)
+static void	exit_code(char **buffer)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 1024)
@@ -121,7 +120,8 @@ static void exit_code(char **buffer)
 
 /*
 OPEN_MAX is the constant that defines the maximum number of open files allowed
-for a single program(1024) so with it we can read multiple 'fd' at the same time
+for a single	program(1024) so with it we can read multiple 'fd' at the same 
+time
 |----------actually OPEN_MAX value depends on the type of system!-----------|
 |___________________________________________________________________________|
 when read returns error (-1) we should clear the static buffer and for extra
@@ -138,7 +138,7 @@ char	*get_next_line(int fd)
 	if (fd == -42)
 	{
 		exit_code(buffer);
-		return NULL;
+		return (NULL);
 	}
 	if (read(fd, NULL, 0) == -1)
 	{

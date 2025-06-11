@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/11 15:23:13 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:29:04 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*get_env_value(char **env, const char *name)
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], name, len) == 0 && env[i][len] == '=')
-			return (env[i] + len + 1); // Return pointer to value after '='
+			return (env[i] + len + 1);
 		i++;
 	}
 	return (NULL);
