@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liyu-her <liyu-her@student.42kl.edy.my>    +#+  +:+       +#+        */
+/*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 23:21:20 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:23:43 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char		**env_list_to_char(t_env *env);
 int			get_env_list_size(t_env *head);
 void		env(t_shell *shell, char **args);
 void		add_back_env_node(t_env *head, t_env *new);
+char		*get_env_value(char **env, const char *name);
 
 // BUILTIN EXPORT
 char		*get_variable(char *prompt);

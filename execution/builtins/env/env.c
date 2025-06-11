@@ -6,7 +6,7 @@
 /*   By: harleyng <harleyng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:16:38 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/10 19:23:06 by harleyng         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:23:13 by harleyng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,22 @@ char	**env_list_to_char(t_env *env)
 		i++;
 	}
 	return (result);
+}
+
+char	*get_env_value(char **env, const char *name)
+{
+	int	i;
+	int	len;
+
+	if (!env || !name)
+		return (NULL);
+	len = ft_strlen(name);
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], name, len) == 0 && env[i][len] == '=')
+			return (env[i] + len + 1); // Return pointer to value after '='
+		i++;
+	}
+	return (NULL);
 }
