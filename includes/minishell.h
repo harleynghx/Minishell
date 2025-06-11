@@ -6,7 +6,7 @@
 /*   By: liyu-her <liyu-her@student.42.kl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:59:13 by harleyng          #+#    #+#             */
-/*   Updated: 2025/06/11 17:14:12 by liyu-her         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:47:27 by liyu-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,8 +274,6 @@ void		free_env(t_env *head);
 void		free_at_exit(t_shell *shell);
 void		free_char_array(char **array);
 void		free_cmd_tbls(t_cmd_tbl *cmd_tbls);
-
-void	copy_dollar_from_string2(char **dst, char **s, int i);
 
 // what does the philosopher pigeon say?
 // TO BE OR NOT TO BE

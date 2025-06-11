@@ -1,0 +1,4 @@
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session6
+FT_HOOK_PATHNAME=login-user.d
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+PATH=/home/liyu-her/.brew/bin:/home/liyu-her/bin:/home/liyu-her/.brew/bin:/home/liyu-her/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
